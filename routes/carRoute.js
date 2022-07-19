@@ -1,21 +1,35 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 // Storing model in a variable
 const Car = require('../models/car')
 
 // Route 1: Adding a car details by Post method , /api/car/addcar
-router.post('/addroom',async(req,res)=>{
+// Status: Working (tested from thunder client)
+router.post('/addcar',async(req,res)=>{
 
     try {
         // Adding car information in database
         const newCar = await Car(req.body)
+
         // Saving the new car information.
         await newCar.save()
     
         // Sending the response if succeed
         res.send("Car has been successfully added.")
         
+    } catch (error) {
+        return res.status(400).json({message:error})
+    }
+})
+
+// Route 2: Fetching all cars by GET method , /api/car/getallcars
+// Status: Working (tested from thunder client)
+router.get('/getallcars',async(req,res)=>{
+    try {
+        // Storing all cars from datbase in cars variable. 
+        const cars = await Car.find({})
+        res.send(cars);
     } catch (error) {
         return res.status(400).json({error})
     }
