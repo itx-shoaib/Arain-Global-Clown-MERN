@@ -22,7 +22,7 @@ function Cars() {
 
             {cars && (cars.map(car => {
                 return <>
-                    <div className="row m-2 my-2 border">
+                    <div className="row m-2 my-2 bs">
                         <div className="col-md-4">
                             <img src={car.imageurls[0]} alt="something" className="smallimg" />
                         </div>
