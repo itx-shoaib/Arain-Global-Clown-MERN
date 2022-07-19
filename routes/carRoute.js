@@ -35,4 +35,18 @@ router.get('/getallcars',async(req,res)=>{
     }
 })
 
+// Route 3: Fetching a car by id by POST method , /api/car/getcarbyid
+router.post('/getcarbyid',async(req,res)=>{
+    // Storing carid from request body.
+    const carid = req.body.carid
+
+    try {        
+        // Geting the car from id.
+        const car = await Car.findOne({_id : carid})
+        res.send(car);
+    } catch (error) {
+        res.status(400).json({error})
+    }
+})
+
 module.exports = router;

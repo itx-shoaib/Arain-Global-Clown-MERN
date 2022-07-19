@@ -37,7 +37,7 @@ function Cars() {
 
                             <div style={{ float: "right" }}>
 
-                                <Link to='/addones'>
+                                <Link to={`/addones/${car._id}`}>
                                     <button className="btn btn-primary m-2">Pay now</button>
                                 </Link>
                             </div>

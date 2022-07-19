@@ -1,7 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React,{useState,useEffect} from 'react'
+import axios from "axios";
+import { useParams , Link} from "react-router-dom";
 
-function Addone() {
+function Addone({match}) {
+    const [cars, setcars] = useState();
+    const carid = useParams();
+
+    useEffect(() => {
+      async function fetchData() {
+        try {
+            const data = await (await axios.post("/api/car/getcarbyid",{carid})).data
+            setcars(data);
+        } catch (error) {
+            console.log(error)
+        }
+      }
+      fetchData();
+    }, []);
+    
     return (
         <div>
             <div className="container">
@@ -17,10 +33,12 @@ function Addone() {
                         </div>
                     </div>
                     <div className="col-md-5">
+                        {cars && (cars.map(car=>{
+                            return <>
                         <div class="card" style={{ width: '18rem' }}>
                             <img src="..." class="card-img-top" alt="..." />
                             <div class="card-body">
-                                <h2 class="card-title">Car name</h2>
+                                <h2 class="card-title">{car.name}</h2>
                                 <h6>Rate:</h6>
                                 <table class="table">
                                     <thead>
@@ -96,6 +114,8 @@ function Addone() {
                                 </Link>
                             </div>
                         </div>
+                            </>
+                        }))}
                     </div>
                 </div>
             </div>
