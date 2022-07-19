@@ -32,7 +32,7 @@ function Cars() {
                             <p>Seats : {car.seat} </p>
                             <p>Doors : {car.door} </p>
                             <p>Milage : {car.milage} </p>
-                            <p>Rent : {car.rentperday} </p>
+                            <p>Rent : $ {car.rentperday} </p>
 
 
                             <div style={{ float: "right" }}>

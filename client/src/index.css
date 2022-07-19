@@ -27,6 +27,7 @@ code {
   height: 200px;
   width: 100%  !important;
   border-radius: 5px !important;
+  margin-top: 32px !important;
 }
 
 .bs{
