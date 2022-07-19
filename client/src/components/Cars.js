@@ -24,7 +24,7 @@ function Cars() {
                 return <>
                     <div className="row m-2 my-2 border">
                         <div className="col-md-4">
-                            <img src='' alt="something" className="smallimg" />
+                            <img src={car.imageurls[0]} alt="something" className="smallimg" />
                         </div>
                         <div className="col-md-7">
 
