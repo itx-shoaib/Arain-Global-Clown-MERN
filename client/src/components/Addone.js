@@ -4,12 +4,13 @@ import { useParams , Link} from "react-router-dom";
 
 function Addone({match}) {
     const [cars, setcars] = useState();
-    const carid = useParams();
+    const {carid} = useParams();
 
     useEffect(() => {
       async function fetchData() {
         try {
             const data = await (await axios.post("/api/car/getcarbyid",{carid})).data
+            console.log(data)
             setcars(data);
         } catch (error) {
             console.log(error)
@@ -33,12 +34,11 @@ function Addone({match}) {
                         </div>
                     </div>
                     <div className="col-md-5">
-                        {cars && (cars.map(car=>{
-                            return <>
+
                         <div class="card" style={{ width: '18rem' }}>
-                            <img src="..." class="card-img-top" alt="..." />
+                            <img src={cars.imageurls[0]} class="card-img-top" alt="..." />
                             <div class="card-body">
-                                <h2 class="card-title">{car.name}</h2>
+                                <h2 class="card-title">{cars.name}</h2>
                                 <h6>Rate:</h6>
                                 <table class="table">
                                     <thead>
@@ -52,12 +52,12 @@ function Addone({match}) {
                                         <tr>
                                             <td>2 Days</td>
                                             <td>$94</td>
-                                            <td>$188</td>
+                                            <td>{cars.rentperday}</td>
                                         </tr>
                                         <tr>
                                             <td>Rental charges rate</td>
                                             <td></td>
-                                            <th>$188</th>
+                                            <th>{cars.rentperday}</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -114,8 +114,6 @@ function Addone({match}) {
                                 </Link>
                             </div>
                         </div>
-                            </>
-                        }))}
                     </div>
                 </div>
             </div>
