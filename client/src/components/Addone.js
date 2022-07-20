@@ -1,11 +1,25 @@
 import React,{useState,useEffect} from 'react'
 import axios from "axios";
+import moment from 'moment';
 import { useParams , Link} from "react-router-dom";
 
 function Addone({match}) {
     const [cars, setcars] = useState();
     const {carid} = useParams();
-
+    // saving dates from localstorage in variable.
+    const fromdate = localStorage.getItem('fromdate');
+    const todate = localStorage.getItem('todate');
+    const todates = moment(todate, 'DD-MM-YYYY')
+    const fromdates = moment(fromdate, 'DD-MM-YYYY') 
+    const totaldays = moment.duration(todates.diff(fromdates)).asDays()
+    const [totalamount , settotalamount] = useState();
+    
+    
+    function bookCar() {
+        alert(totalamount);
+     
+        
+    }
     useEffect(() => {
       async function fetchData() {
         try {
@@ -50,7 +64,7 @@ function Addone({match}) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>2 Days</td>
+                                            <td>{totaldays} Days</td>
                                             <td>$94</td>
                                             <td>{cars.rentperday}</td>
                                         </tr>
@@ -109,9 +123,9 @@ function Addone({match}) {
                                 <div>
                                     <p><b>Estimated Total : ${cars.rentperday}</b></p>
                                 </div>
-                                <Link to="/checkout">
-                                <button class="btn btn-primary">Continue</button>
-                                </Link>
+                                {/* <Link to="/checkout"> */}
+                                <button class="btn btn-primary" onClick={bookCar}>Continue</button>
+                                {/* </Link> */}
                             </div>
                         </div>)}
                     </div>
