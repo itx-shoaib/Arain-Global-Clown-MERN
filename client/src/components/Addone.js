@@ -45,7 +45,7 @@ function Addone({match}) {
                             <div class="card-body">
                                 <h5 class="card-title">Additional Driver 1</h5>
                                 <p class="card-text">15$ will be charged per additional driver</p>
-                                <button class="btn btn-primary">Add</button>
+                                <button class="btn btn-primary" >Add</button>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ function Addone({match}) {
                         {cars && (<div class="card" style={{ width: '18rem' }}>
                             <img src={cars.imageurls[0]} class="card-img-top" alt="..." />
                             <div class="card-body">
-                                <h2 class="card-title">car name:{cars.name}</h2>
+                                <h2 class="card-title">{cars.name}</h2>
                                 <h6>Rate:</h6>
                                 <table class="table">
                                     <thead>
@@ -73,7 +73,7 @@ function Addone({match}) {
                                         <tr>
                                             <td>Rental charges rate</td>
                                             <td></td>
-                                            <th>{cars.rentperday}</th>
+                                            <th> ${cars.rentperday}</th>
                                         </tr>
                                     </tbody>
                                 </table>
