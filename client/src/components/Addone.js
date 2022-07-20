@@ -9,7 +9,7 @@ function Addone({match}) {
     useEffect(() => {
       async function fetchData() {
         try {
-            const data = (await axios.get("/api/car/getcarbyid",{carid})).data
+            const data = (await axios.get(`/api/car/getcarbyid/${carid}`)).data
             console.log(data)
             setcars(data);
         } catch (error) {
@@ -35,8 +35,8 @@ function Addone({match}) {
                     </div>
                     <div className="col-md-5">
 
-                        <div class="card" style={{ width: '18rem' }}>
-                            {/* <img src={cars.imageurls[0]} class="card-img-top" alt="..." /> */}
+                        {cars && (<div class="card" style={{ width: '18rem' }}>
+                            <img src={cars.imageurls[0]} class="card-img-top" alt="..." />
                             <div class="card-body">
                                 <h2 class="card-title">car name:{cars.name}</h2>
                                 <h6>Rate:</h6>
@@ -52,12 +52,12 @@ function Addone({match}) {
                                         <tr>
                                             <td>2 Days</td>
                                             <td>$94</td>
-                                            <td>rent per day</td>
+                                            <td>{cars.rentperday}</td>
                                         </tr>
                                         <tr>
                                             <td>Rental charges rate</td>
                                             <td></td>
-                                            <th>rent per day</th>
+                                            <th>{cars.rentperday}</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -107,13 +107,13 @@ function Addone({match}) {
                                 </table>
                                 <br />
                                 <div>
-                                    <p><b>Estimated Total : $261.36</b></p>
+                                    <p><b>Estimated Total : ${cars.rentperday}</b></p>
                                 </div>
                                 <Link to="/checkout">
                                 <button class="btn btn-primary">Continue</button>
                                 </Link>
                             </div>
-                        </div>
+                        </div>)}
                     </div>
                 </div>
             </div>
