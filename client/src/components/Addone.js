@@ -9,7 +9,7 @@ function Addone({match}) {
     useEffect(() => {
       async function fetchData() {
         try {
-            const data = await (await axios.post("/api/car/getcarbyid",{carid})).data
+            const data = (await axios.get("/api/car/getcarbyid",{carid})).data
             console.log(data)
             setcars(data);
         } catch (error) {
@@ -36,9 +36,9 @@ function Addone({match}) {
                     <div className="col-md-5">
 
                         <div class="card" style={{ width: '18rem' }}>
-                            <img src={cars.imageurls[0]} class="card-img-top" alt="..." />
+                            {/* <img src={cars.imageurls[0]} class="card-img-top" alt="..." /> */}
                             <div class="card-body">
-                                <h2 class="card-title">{cars.name}</h2>
+                                <h2 class="card-title">car name:{cars.name}</h2>
                                 <h6>Rate:</h6>
                                 <table class="table">
                                     <thead>
@@ -52,12 +52,12 @@ function Addone({match}) {
                                         <tr>
                                             <td>2 Days</td>
                                             <td>$94</td>
-                                            <td>{cars.rentperday}</td>
+                                            <td>rent per day</td>
                                         </tr>
                                         <tr>
                                             <td>Rental charges rate</td>
                                             <td></td>
-                                            <th>{cars.rentperday}</th>
+                                            <th>rent per day</th>
                                         </tr>
                                     </tbody>
                                 </table>
