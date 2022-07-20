@@ -4,6 +4,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function Reservationscreen() {
+    // saving dates from localstorage in variable.
+    const fromdate = localStorage.getItem('fromdate');
+    const todate = localStorage.getItem('todate');
     return (
         <>
             <div className="container">
@@ -11,8 +14,8 @@ function Reservationscreen() {
                 <div className="row my-5">
                     <div className="col-md-4 border">
                         <h4>Your itinerary</h4>
-                        <p>Pickup date : 20-11-2020</p>
-                        <p>Drop off : 25-11-2020</p>
+                        <p>Pickup date : {fromdate}</p>
+                        <p>Drop off : {todate}</p>
                     </div>
                     <div className="col-md-4 border">
                         <h4>Select vehicle/Add-ones</h4>

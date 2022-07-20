@@ -10,10 +10,11 @@ function Homescreen() {
   const [todate, settodate] = useState();
 
   function filterByDate(dates) {
-    setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
-    settodate(moment(dates[1]).format('DD-MM-YYYY'))
-    console.log(setfromdate)
+    setfromdate(moment(dates[0].format('DD-MM-YYYY'))._i)
+    settodate(moment(dates[1].format('DD-MM-YYYY'))._i)
   }
+  localStorage.setItem('fromdate',formdate)
+  localStorage.setItem('todate',todate)
   return (
     <div>
       <div className="conatiner">
