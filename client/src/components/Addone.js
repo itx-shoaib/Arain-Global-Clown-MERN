@@ -16,7 +16,6 @@ function Addone({match}) {
     
     
     function bookCar() {
-        alert(totalamount);
      
         
     }
@@ -24,7 +23,7 @@ function Addone({match}) {
       async function fetchData() {
         try {
             const data = (await axios.get(`/api/car/getcarbyid/${carid}`)).data
-            console.log(data)
+            settotalamount(data.rentperday * totaldays)
             setcars(data);
         } catch (error) {
             console.log(error)
@@ -32,6 +31,9 @@ function Addone({match}) {
       }
       fetchData();
     }, []);
+
+    const amount = Math.round(totalamount)
+    const grandtotal = amount + 29 + 31
     
     return (
         <div>
@@ -66,7 +68,7 @@ function Addone({match}) {
                                         <tr>
                                             <td>{totaldays} Days</td>
                                             <td>$94</td>
-                                            <td>{cars.rentperday}</td>
+                                            <td>${amount}</td>
                                         </tr>
                                         <tr>
                                             <td>Rental charges rate</td>
@@ -121,7 +123,7 @@ function Addone({match}) {
                                 </table>
                                 <br />
                                 <div>
-                                    <p><b>Estimated Total : ${cars.rentperday}</b></p>
+                                    <p><b>Estimated Total : ${grandtotal}</b></p>
                                 </div>
                                 {/* <Link to="/checkout"> */}
                                 <button class="btn btn-primary" onClick={bookCar}>Continue</button>
