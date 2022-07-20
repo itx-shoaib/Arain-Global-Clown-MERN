@@ -24,9 +24,10 @@ function Homescreen() {
             <RangePicker format='DD-MM-YYYY' onChange={filterByDate} />
 
             <div>
-              <Link to='/reservation'>
+              {formdate && todate && (<Link to='/reservation'>
                 <button className="btn my-4 btn-lg btn-primary">Continue reservation</button>
-              </Link>
+              </Link>)}
+              
             </div>
           </div>
         </div>
