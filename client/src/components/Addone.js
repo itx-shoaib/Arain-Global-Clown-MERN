@@ -1,62 +1,77 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import moment from 'moment';
-import { useParams , Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-function Addone({match}) {
+function Addone({ match }) {
     const [cars, setcars] = useState();
-    const {carid} = useParams();
+    const { carid } = useParams();
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
     const todate = localStorage.getItem('todate');
     const todates = moment(todate, 'DD-MM-YYYY')
-    const fromdates = moment(fromdate, 'DD-MM-YYYY') 
+    const fromdates = moment(fromdate, 'DD-MM-YYYY')
     const totaldays = moment.duration(todates.diff(fromdates)).asDays()
-    const [totalamount , settotalamount] = useState();
-    
-    
-    function bookCar() {
-     
-        
-    }
-    useEffect(() => {
-      async function fetchData() {
+    const [totalamount, settotalamount] = useState();
+    localStorage.setItem('totaldays',totaldays)
+
+    async function bookCar() {
+        const bookingDetail = {
+            cars,
+            carid:carid,
+            fromdate:JSON.parse(fromdate),
+            todate:JSON.parse(todate),
+            totalamount:JSON.parse(localStorage.getItem('grandtotal')),
+            totaldays:JSON.parse(localStorage.getItem('totaldays'))
+        }
+
         try {
-            const data = (await axios.get(`/api/car/getcarbyid/${carid}`)).data
-            settotalamount(data.rentperday * totaldays)
-            setcars(data);
+            const result = await axios.post('/api/booking/bookcar',bookingDetail)
+            console.log(result)
         } catch (error) {
             console.log(error)
         }
-      }
-      fetchData();
+
+    }
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = (await axios.get(`/api/car/getcarbyid/${carid}`)).data
+                settotalamount(data.rentperday * totaldays)
+                setcars(data);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchData();
     }, []);
 
     const amount = Math.round(totalamount)
     const grandtotal = amount + 29 + 31
-    
+    localStorage.setItem('grandtotal',grandtotal)
+
     return (
         <div>
             <div className="container">
                 <h1>Vehicle Add Ones</h1>
                 <div className="row">
                     <div className="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Additional Driver 1</h5>
-                                <p class="card-text">15$ will be charged per additional driver</p>
-                                <button class="btn btn-primary" >Add</button>
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Additional Driver 1</h5>
+                                <p className="card-text">15$ will be charged per additional driver</p>
+                                <button className="btn btn-primary" >Add</button>
                             </div>
                         </div>
                     </div>
                     <div className="col-md-5">
 
-                        {cars && (<div class="card" style={{ width: '18rem' }}>
-                            <img src={cars.imageurls[0]} class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h2 class="card-title">{cars.name}</h2>
+                        {cars && (<div className="card mb-4" style={{ width: '18rem' }}>
+                            <img src={cars.imageurls[0]} className="card-img-top" alt="..." />
+                            <div className="card-body">
+                                <h2 className="card-title">{cars.name}</h2>
                                 <h6>Rate:</h6>
-                                <table class="table">
+                                <table className="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">QTY</th>
@@ -79,7 +94,7 @@ function Addone({match}) {
                                 </table>
                                 <br />
                                 <h6>Add Ones:</h6>
-                                <table class="table">
+                                <table className="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">QTY</th>
@@ -102,7 +117,7 @@ function Addone({match}) {
                                 </table>
                                 <br />
                                 <h6>Taxes & Fees:</h6>
-                                <table class="table">
+                                <table className="table">
                                     <tbody>
                                         <tr>
                                             <td>Tax</td>
@@ -126,7 +141,7 @@ function Addone({match}) {
                                     <p><b>Estimated Total : ${grandtotal}</b></p>
                                 </div>
                                 {/* <Link to="/checkout"> */}
-                                <button class="btn btn-primary" onClick={bookCar}>Continue</button>
+                                <button className="btn btn-primary" onClick={bookCar}>Continue</button>
                                 {/* </Link> */}
                             </div>
                         </div>)}

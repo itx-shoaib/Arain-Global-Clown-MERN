@@ -24,15 +24,6 @@ const bookingSchema = mongoose.Schema({
     totalamount:{
         type: Number,
         required: true
-    },
-    transactionid:{
-        type: String,
-        required: true
-    },
-    status:{
-        type: String,
-        required: true,
-        default: "booked"
     }
 
 
