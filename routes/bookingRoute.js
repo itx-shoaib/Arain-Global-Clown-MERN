@@ -35,16 +35,26 @@ router.post('/bookcar',async(req,res)=>{
 });
 
 // Saving a checkout form by POST method PATH: /api/booking/checkout/:carid/:car
-// STATUS: Working , test by Thunder client
+// STATUS: Working PATH, test by Thunder client
 router.post('/checkout/:carid/:car',async(req,res)=>{
-    const {} = req.body
+    const checkout = new Checkout({
+        firstname:req.body.firstname,
+        lastname: req.body.lastname,
+        address: req.body.address,
+        town: req.body.town,
+        state: req.body.state,
+        phone: req.body.phone,
+        email: req.body.email,
+        car: req.body.car,
+        carid: req.body.carid
+    })
+
     try {
-        const newChekout = await Checkout(req.body)
-        await newChekout.save();
+        const newCheckout = await checkout.save()
         res.send('Your form has been successfully saved.')
         
     } catch (error) {
-        return res.status(400).json({message:error})
+        return res.status(400).json({error})
     }
 });
 
