@@ -140,9 +140,9 @@ function Addone({ match }) {
                                 <div>
                                     <p><b>Estimated Total : ${grandtotal}</b></p>
                                 </div>
-                                {/* <Link to="/checkout"> */}
+                                <Link to="/checkout">
                                 <button className="btn btn-primary" onClick={bookCar}>Continue</button>
-                                {/* </Link> */}
+                                </Link>
                             </div>
                         </div>)}
                     </div>
