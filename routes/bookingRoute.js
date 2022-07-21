@@ -5,7 +5,7 @@ const Booking = require('../models/booking');
 const Car = require('../models/car')
 
 // Booking a car by POST method PATH: /api/booking/bookcar
-// STATUS: PATH IS WORKING
+// STATUS: WORKING (BUG : fromdate and todate store as ""20-12-2022"" in db)
 router.post('/bookcar',async(req,res)=>{
 
     const {cars,carid,fromdate,todate,totalamount,totaldays} = req.body
