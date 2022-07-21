@@ -4,6 +4,7 @@ const router = express.Router();
 const Booking = require('../models/booking');
 const Car = require('../models/car')
 
+// Booking a car by POST method PATH: /api/booking/bookcar
 router.post('/bookcar',async(req,res)=>{
 
     const {cars,fromdate,todate,totalamount,totaldays} = req.body

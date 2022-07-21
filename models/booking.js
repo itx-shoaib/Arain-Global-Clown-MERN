@@ -24,6 +24,11 @@ const bookingSchema = mongoose.Schema({
     totalamount:{
         type: Number,
         required: true
+    },
+    status:{
+        type: String,
+        required: true,
+        default: "booked"
     }
 
 
