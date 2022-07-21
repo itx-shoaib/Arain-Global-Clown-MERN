@@ -13,14 +13,17 @@ function Addone({ match }) {
     const fromdates = moment(fromdate, 'DD-MM-YYYY')
     const totaldays = moment.duration(todates.diff(fromdates)).asDays()
     const [totalamount, settotalamount] = useState();
+    const amount = Math.round(totalamount)
+    const grandtotal = amount + 29 + 31
     localStorage.setItem('totaldays',totaldays)
+    localStorage.setItem('grandtotal',grandtotal)
 
     async function bookCar() {
         const bookingDetail = {
-            cars,
+            cars:cars.name,
             carid:carid,
-            fromdate:JSON.parse(fromdate),
-            todate:JSON.parse(todate),
+            fromdate:JSON.stringify(fromdate),
+            todate:JSON.stringify(todate),
             totalamount:JSON.parse(localStorage.getItem('grandtotal')),
             totaldays:JSON.parse(localStorage.getItem('totaldays'))
         }
@@ -46,9 +49,6 @@ function Addone({ match }) {
         fetchData();
     }, []);
 
-    const amount = Math.round(totalamount)
-    const grandtotal = amount + 29 + 31
-    localStorage.setItem('grandtotal',grandtotal)
 
     return (
         <div>

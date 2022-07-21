@@ -8,13 +8,13 @@ const Car = require('../models/car')
 // STATUS: PATH IS WORKING
 router.post('/bookcar',async(req,res)=>{
 
-    const {cars,fromdate,todate,totalamount,totaldays} = req.body
+    const {cars,carid,fromdate,todate,totalamount,totaldays} = req.body
 
     try {
         
         const newBooking = await Booking({
             car:cars.name,
-            carid:cars._id,
+            carid:carid,
             fromdate:fromdate,
             todate:todate,
             totalamount:totalamount,
@@ -22,9 +22,9 @@ router.post('/bookcar',async(req,res)=>{
         })
     
         const booking = await newBooking.save()
-        const cartemp = await Car.findOne({_id:car._id});
-        cartemp.currentbookings.push({bookingid:booking._id, fromdate:fromdate, todate:todate, car:car.name, carid: car._id})
-        await cartemp.save();
+        // const cartemp = await Car.findOne({_id:carid});
+        // cartemp.currentbookings.push({bookingid:booking._id, fromdate:fromdate, todate:todate, car:car.name, carid: car._id})
+        // await cartemp.save();
         res.send("Your car has been booked successfully")
 
     } catch (error) {
