@@ -22,13 +22,13 @@ router.post('/bookcar',async(req,res)=>{
         })
     
         const booking = await newBooking.save()
-        // const cartemp = await Car.findOne({_id:carid});
-        // cartemp.currentbookings.push({bookingid:booking._id, fromdate:fromdate, todate:todate, car:car.name, carid: car._id})
-        // await cartemp.save();
+        const cartemp = await Car.findOne({_id:carid});
+        cartemp.currentbookings.push({bookingid:booking._id, fromdate:fromdate, todate:todate, car:cars.name, carid: carid})
+        await cartemp.save();
         res.send("Your car has been booked successfully")
 
     } catch (error) {
-        return res.status(400).json({error})
+        return res.status(400).json({error:error})
     }
 
 });
