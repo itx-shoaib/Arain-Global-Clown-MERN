@@ -12,6 +12,16 @@ function Checkout({ match }) {
     const [phone, setphone] = useState();
     const [email, setemail] = useState();
 
+async function register() {
+    try {
+        const data = await (await axios.post(`/api/booking/checkout/${carid}/${car}`)).data
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
     return (
         <div className='container'>
             <h1>Checkout</h1>
@@ -60,7 +70,7 @@ function Checkout({ match }) {
                             <label for="carid">Car id</label>
                             <input type="text" class="form-control" id="carid" value={carid} />
                         </div>
-                        <button type="submit" class="btn btn-primary">Place Order</button>
+                        <button type="submit" class="btn btn-primary" onClick={register}>Place Order</button>
                     </form>
 
                 </div>
