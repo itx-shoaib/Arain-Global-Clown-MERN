@@ -20,7 +20,7 @@ function Addone({ match }) {
 
     async function bookCar() {
         const bookingDetail = {
-            cars:cars.name,
+            cars:cars,
             carid:carid,
             fromdate:JSON.stringify(fromdate),
             todate:JSON.stringify(todate),
