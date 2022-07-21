@@ -45,8 +45,8 @@ router.post('/checkout/:carid/:car',async(req,res)=>{
         state: req.body.state,
         phone: req.body.phone,
         email: req.body.email,
-        car: req.body.car,
-        carid: req.body.carid
+        car: req.params.car,
+        carid: req.params.carid
     })
 
     try {
