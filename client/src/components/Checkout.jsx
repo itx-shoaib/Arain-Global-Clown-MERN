@@ -39,6 +39,8 @@ async function register() {
     } catch (error) {
         console.log(error)
     }
+
+
 }
 
 
@@ -90,7 +92,7 @@ async function register() {
                             <label for="carid">Car id</label>
                             <input type="text" class="form-control" id="carid" value={carid} />
                         </div>
-                        <button type="submit" class="btn btn-primary" onClick={register}>Place Order</button>
+                        <button class="btn btn-primary" onClick={register}>Place Order</button>
                     </form>
 
                 </div>
