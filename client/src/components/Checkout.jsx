@@ -13,9 +13,29 @@ function Checkout({ match }) {
     const [email, setemail] = useState();
 
 async function register() {
+    const form = {
+        firstname,
+        lastname,
+        address,
+        town,
+        state,
+        phone,
+        email,
+        car,
+        carid
+    }
+    
     try {
-        const data = await (await axios.post(`/api/booking/checkout/${carid}/${car}`)).data
+        const data = await (await axios.post(`/api/booking/checkout/${carid}/${car}`),form).data
         console.log(data)
+        setfirstname('')
+        setlastname('')
+        setaddress('')
+        settown('')
+        setstate('')
+        setphone('')
+        setemail('')
+
     } catch (error) {
         console.log(error)
     }

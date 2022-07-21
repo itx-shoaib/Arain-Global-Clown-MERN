@@ -37,6 +37,7 @@ router.post('/bookcar',async(req,res)=>{
 // Saving a checkout form by POST method PATH: /api/booking/checkout/:carid/:car
 // STATUS: Working , test by Thunder client
 router.post('/checkout/:carid/:car',async(req,res)=>{
+    const {} = req.body
     try {
         const newChekout = await Checkout(req.body)
         await newChekout.save();
