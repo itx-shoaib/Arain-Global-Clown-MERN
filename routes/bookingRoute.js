@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Booking = require('../models/booking');
 const Car = require('../models/car')
+const Checkout = require('../models/checkout');
 
 // Booking a car by POST method PATH: /api/booking/bookcar
 // STATUS: WORKING (BUG : fromdate and todate store as ""20-12-2022"" in db)
@@ -31,6 +32,18 @@ router.post('/bookcar',async(req,res)=>{
         return res.status(400).json({error:error})
     }
 
+});
+
+// Saving a checkout form by POST method PATH: /api/booking/checkout/:carid/:car
+router.post('/checkout/:carid/:car',async(req,res)=>{
+    try {
+        const newChekout = await Checkout(req.body)
+        await newChekout.save();
+        res.send('Your form has been successfully saved.')
+        
+    } catch (error) {
+        return res.status(400).json({error})
+    }
 });
 
 module.exports = router;
