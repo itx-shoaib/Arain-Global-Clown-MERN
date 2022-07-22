@@ -49,6 +49,21 @@ function Addone({ match }) {
         fetchData();
     }, []);
 
+    useEffect(() => {
+      async function fetchData() {
+        try {
+            const data = await (await axios.get('/api/addon/getallinformation')).data
+            console.log(data)
+            
+        } catch (error) {
+            console.log(error)
+        }
+      }
+
+      fetchData()
+    }, [])
+    
+
 
     return (
         <div>
