@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 
 function Checkout({ match }) {
     const { carid, car } = useParams();
-    const [firstname, setfirstname] = useState();
-    const [lastname, setlastname] = useState();
-    const [address, setaddress] = useState();
-    const [town, settown] = useState();
-    const [state, setstate] = useState();
-    const [phone, setphone] = useState();
-    const [email, setemail] = useState();
+    const [firstname, setfirstname] = useState('');
+    const [lastname, setlastname] = useState('');
+    const [address, setaddress] = useState('');
+    const [town, settown] = useState('');
+    const [state, setstate] = useState('');
+    const [phone, setphone] = useState('');
+    const [email, setemail] = useState('');
 
     async function submit(e) {
         e.preventDefault();
