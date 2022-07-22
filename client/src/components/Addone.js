@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 
 function Addone({ match }) {
     const [cars, setcars] = useState();
+    const [addon, setaddon] = useState();
     const { carid } = useParams();
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
@@ -15,21 +16,21 @@ function Addone({ match }) {
     const [totalamount, settotalamount] = useState();
     const amount = Math.round(totalamount)
     const grandtotal = amount + 29 + 31
-    localStorage.setItem('totaldays',totaldays)
-    localStorage.setItem('grandtotal',grandtotal)
+    localStorage.setItem('totaldays', totaldays)
+    localStorage.setItem('grandtotal', grandtotal)
 
     async function bookCar() {
         const bookingDetail = {
-            cars:cars,
-            carid:carid,
-            fromdate:JSON.stringify(fromdate),
-            todate:JSON.stringify(todate),
-            totalamount:JSON.parse(localStorage.getItem('grandtotal')),
-            totaldays:JSON.parse(localStorage.getItem('totaldays'))
+            cars: cars,
+            carid: carid,
+            fromdate: JSON.stringify(fromdate),
+            todate: JSON.stringify(todate),
+            totalamount: JSON.parse(localStorage.getItem('grandtotal')),
+            totaldays: JSON.parse(localStorage.getItem('totaldays'))
         }
 
         try {
-            const result = await axios.post('/api/booking/bookcar',bookingDetail)
+            const result = await axios.post('/api/booking/bookcar', bookingDetail)
             console.log(result)
         } catch (error) {
             console.log(error)
@@ -50,19 +51,19 @@ function Addone({ match }) {
     }, []);
 
     useEffect(() => {
-      async function fetchData() {
-        try {
-            const data = await (await axios.get('/api/addon/getallinformation')).data
-            console.log(data)
-            
-        } catch (error) {
-            console.log(error)
-        }
-      }
+        async function fetchData() {
+            try {
+                const data = await (await axios.get('/api/addon/getallinformation')).data
+                setaddon(data);
 
-      fetchData()
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        fetchData()
     }, [])
-    
+
 
 
     return (
@@ -71,13 +72,19 @@ function Addone({ match }) {
                 <h1>Vehicle Add Ones</h1>
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Additional Driver 1</h5>
-                                <p className="card-text">15$ will be charged per additional driver</p>
-                                <button className="btn btn-primary" >Add</button>
-                            </div>
-                        </div>
+
+                        {addon && (addon.map(addon => {
+                            return <>
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h5 className="card-title">{addon.title}</h5>
+                                        <p className="card-text">{addon.description}</p>
+                                        <button className="btn btn-primary" >Add</button>
+                                    </div>
+                                </div>
+                            </>
+                        }))}
+
                     </div>
                     <div className="col-md-5">
 
@@ -156,7 +163,7 @@ function Addone({ match }) {
                                     <p><b>Estimated Total : ${grandtotal}</b></p>
                                 </div>
                                 <Link to={`/checkout/${carid}/${cars.name}`}>
-                                <button className="btn btn-primary" onClick={bookCar}>Continue</button>
+                                    <button className="btn btn-primary" onClick={bookCar}>Continue</button>
                                 </Link>
                             </div>
                         </div>)}
