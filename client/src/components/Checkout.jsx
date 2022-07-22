@@ -12,7 +12,8 @@ function Checkout({ match }) {
     const [phone, setphone] = useState();
     const [email, setemail] = useState();
 
-    async function submit() {
+    async function submit(e) {
+        e.preventDefault();
         const form = {
             firstname,
             lastname,
