@@ -4,7 +4,7 @@ const router = express.Router();
 const Additional = require('../models/additional')
 
 // Router 1: Adding a addon by POST method PATH: /api/addon/addinformation
-// Status: Path is working
+// Status: Working
 router.post('/addinformation',async(req,res)=>{
     try {
         const additional = await Additional(req.body)
@@ -16,4 +16,14 @@ router.post('/addinformation',async(req,res)=>{
     }
 });
 
+// Router 2: Getting a addon by GET method PATH: /api/addon/getallinformation
+// Status: Working
+router.get('/getallinformation',async(req,res)=>{
+    try {
+        const additional = await Additional.find({})
+        res.send(additional)
+    } catch (error) {
+        return res.status(400).json({error})
+    }
+})
 module.exports = router;
