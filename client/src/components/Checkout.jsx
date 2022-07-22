@@ -26,9 +26,8 @@ function Checkout({ match }) {
             carid
         }
 
-
         try {
-            const data = await (await axios.post(`/api/booking/checkout/${carid}/${car}`), form).data
+            const data = await axios.post(`/api/booking/checkout/${carid}/${car}`, form)
             console.log(data)
             setfirstname('')
             setlastname('')
