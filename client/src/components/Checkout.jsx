@@ -26,6 +26,7 @@ function Checkout({ match }) {
             carid
         }
 
+
         try {
             const data = await (await axios.post(`/api/booking/checkout/${carid}/${car}`), form).data
             console.log(data)
@@ -58,11 +59,11 @@ function Checkout({ match }) {
                     <form className='container'>
                         <div className="form-group">
                             <label htmlFor="firstname">First Name</label>
-                            <input type="text" className="form-control" id="firstname" value={firstname} onChange={(e) => { setfirstname(e.targer.value) }} />
+                            <input type="text" className="form-control" id="firstname" value={firstname} onChange={(e) => { setfirstname(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="lastname">Last Name</label>
-                            <input type="text" className="form-control" id="lastname" value={lastname} onChange={(e) => { setlastname(e.targer.value) }} />
+                            <input type="text" className="form-control" id="lastname" value={lastname} onChange={(e) => { setlastname(e.target.value) }} />
                         </div>
                         <h6>Country / Region US</h6>
                         <div className="form-group">
