@@ -68,13 +68,16 @@ function Addone({ match }) {
     }, [])
 
     async function add() {
-        // console.log(addon[0].title)
-        // console.log(addon[0].price)
-        for (let index = 0; index < addon.length; index++) {
-            const element = addon[index];
-            alert(element[index])
+        const addonDetail = {
+            title:addon.title,
+            price:addon.price
+        }
 
+        try {
             
+            const data = await axios.post('/api/addon/addaddon',addonDetail)
+        } catch (error) {
+            console.log(error)
         }
     }
 

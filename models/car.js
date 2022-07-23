@@ -23,10 +23,11 @@ const carSchema = mongoose.Schema({
     },
     imageurls : [],
     currentbookings: [],
-    driver1:[],
-    driver2:[],
-    cleaning:[],
-    refuel:[],
+    addon:[]
+    // driver1:[],
+    // driver2:[],
+    // cleaning:[],
+    // refuel:[],
 } , {
     timestamps : true,
 })
