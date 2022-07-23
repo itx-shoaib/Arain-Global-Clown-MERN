@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
-    const [booking, setbooking] = useState();
+    // const [booking, setbooking] = useState();
     const { carid } = useParams();
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
@@ -32,7 +32,7 @@ function Addone({ match }) {
 
         try {
             const result = await axios.post('/api/booking/bookcar', bookingDetail)
-            setbooking(result._id)
+            // setbooking(result._id)
             console.log(result)
         } catch (error) {
             console.log(error)
@@ -68,7 +68,14 @@ function Addone({ match }) {
     }, [])
 
     async function add() {
-        alert(booking)
+        // console.log(addon[0].title)
+        // console.log(addon[0].price)
+        for (let index = 0; index < addon.length; index++) {
+            const element = addon[index];
+            alert(element[index])
+
+            
+        }
     }
 
     return (
@@ -84,7 +91,7 @@ function Addone({ match }) {
                                     <div className="card-body">
                                         <h5 className="card-title">{addon.title}</h5>
                                         <p className="card-text">{addon.description}</p>
-                                        <button className="btn btn-primary" onClick={add} >Add</button>
+                                        <button  className="btn btn-primary" onClick={add} >Add</button>
                                     </div>
                                 </div>
                             </>

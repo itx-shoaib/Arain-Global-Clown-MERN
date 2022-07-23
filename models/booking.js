@@ -25,10 +25,6 @@ const bookingSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    driver1:[],
-    driver2:[],
-    cleaning:[],
-    refuel:[],
     status:{
         type: String,
         required: true,
