@@ -32,11 +32,14 @@ router.get('/getallinformation',async(req,res)=>{
 // Router 3: Adding a addon in booking model by POST method PATH: /api/addon/addaddon
 // Status: Path is Working
 router.post('/addaddon',async(req,res)=>{
-    const {title,price} = req.body
+    const {title,price,carid} = req.body
+    console.log(title)
+    console.log(price)
+
     try {
-        const additional = await Car.findOne({id:car._id})
-        additional.addon.push({title:title,price:price})
-        res.send("Your addon has been successfully added")
+        const additional = await Car.findOne({_id:carid})
+        additional.addon.push({carid:carid,title:title,price:price})
+        res.send(additional.addon)
     } catch (error) {
         return res.status(400).json({error})
     }

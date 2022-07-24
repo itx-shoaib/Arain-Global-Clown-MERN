@@ -69,8 +69,9 @@ function Addone({ match }) {
 
     async function add() {
         const addonDetail = {
-            title:addon.title,
-            price:addon.price
+            title:addon[0].title,
+            price:addon[0].price,
+            carid:carid
         }
 
         try {
