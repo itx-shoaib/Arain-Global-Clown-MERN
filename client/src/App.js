@@ -16,7 +16,7 @@ function App() {
           <Route path='/' element={<Homescreen/>} />
           <Route path='/reservation' element={<Reservationscreen/>} />
           <Route path='/addones/:carid' element={<Addone/>} />
-          <Route path='/addones/:addonid' element={<Addone/>} />
+          <Route path='/addon/:addonid' element={<Addone/>} />
           <Route path='/checkout/:carid/:car' element={<Checkout/>} />
           
         </Routes>

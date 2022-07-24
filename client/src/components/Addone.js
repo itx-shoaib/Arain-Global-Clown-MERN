@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import moment from 'moment';
 import { useParams, Link } from "react-router-dom";
+import Additional from './Additional';
 
 function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
     // const [booking, setbooking] = useState();
     const { carid } = useParams();
+    const { addonid } = useParams();
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
     const todate = localStorage.getItem('todate');
@@ -52,35 +54,7 @@ function Addone({ match }) {
         fetchData();
     }, []);
 
-    // For Addon
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await (await axios.get('/api/addon/getallinformation')).data
-                setaddon(data);
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        fetchData()
-    }, [])
-
-    async function add() {
-        const addonDetail = {
-            title:addon[0].title,
-            price:addon[0].price,
-            carid:carid
-        }
-
-        try {
-            
-            const data = await axios.post('/api/addon/addaddon',addonDetail)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    
 
     return (
         <div>
@@ -89,17 +63,7 @@ function Addone({ match }) {
                 <div className="row">
                     <div className="col-md-6">
 
-                        {addon && (addon.map(addon => {
-                            return <>
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h5 className="card-title">{addon.title}</h5>
-                                        <p className="card-text">{addon.description}</p>
-                                        <button  className="btn btn-primary" onClick={add} >Add</button>
-                                    </div>
-                                </div>
-                            </>
-                        }))}
+                        <Additional/>
 
                     </div>
                     <div className="col-md-5">
