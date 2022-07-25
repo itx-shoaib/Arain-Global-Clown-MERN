@@ -4,7 +4,7 @@ const router = express.Router();
 const Order = require('../models/order');
 
 // Route:1 Getting order dates in order Model by POST method : /api/order/takeorderdate
-// STATUS: Path is Working
+// STATUS: Working
 router.post('/takeorderdate',async(req,res)=>{
     const { formdate,todate } = req.body
     try {
@@ -21,4 +21,10 @@ router.post('/takeorderdate',async(req,res)=>{
     }
 });
 
+// Router:2 Adding car info in cart array inn order model by POST method : /api/order/addtocart
+// STATUS : Path is Working
+router.post('/addtocart',async(req,res)=>{
+    const order = await Order.findOne({_id:orderid})
+    order.cart.push({})
+})
 module.exports = router;
