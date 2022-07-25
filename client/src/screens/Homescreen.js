@@ -17,11 +17,23 @@ function Homescreen() {
   localStorage.setItem('fromdate',formdate)
   localStorage.setItem('todate',todate)
 
-  function takeorderdate() {
-      const dates = {formdate,todate}
+  async function takeorderdate() {
+      const dates = {
+        formdate: formdate,
+        todate: todate
+      }
 
-      const data = axios.post('/api/order/takeorderdate',dates)
+
+      try {
+        const data = await (await axios.post('/api/order/takeorderdate',dates)).data
+        console.log(data)
+        
+      } catch (error) {
+        console.log(error)
+      }
+
   }
+
   return (
     <div>
       <div className="conatiner">

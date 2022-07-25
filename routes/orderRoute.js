@@ -6,15 +6,15 @@ const Order = require('../models/order');
 // Route:1 Getting order dates in order Model by POST method : /api/order/takeorderdate
 // STATUS: Path is Working
 router.post('/takeorderdate',async(req,res)=>{
-    const { fromdate,todate } = req.body
+    const { formdate,todate } = req.body
     try {
-        const orderdate = await Order({
-            startdate:fromdate,
+        const orderdate = new Order({
+            startdate:formdate,
             enddate:todate
         })
-        
-        const orderbook = orderdate.save();
-        res.send("Your order has been successfully added.")
+
+        const orderbook = await orderdate.save();
+        res.send(orderbook._id)
         
     } catch (error) {
         return res.status(400).json({error})
