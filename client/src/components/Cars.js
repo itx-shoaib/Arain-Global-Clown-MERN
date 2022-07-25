@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 function Cars() {
     const [cars, setcars] = useState([])
+    const id = localStorage.getItem('orderid');
 
 
     useEffect(() => {
@@ -17,6 +18,17 @@ function Cars() {
         }
         fetchData();
     }, [])
+
+    async function addtocart() {
+        const orderid = id
+        try {
+            const result = await axios.post('/api/order/addtocart',orderid)
+            console.log(result)
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div>
@@ -40,7 +52,7 @@ function Cars() {
                             <div style={{ float: "right" }}>
 
                                 <Link to={`/addones/${car._id}`}>
-                                    <button className="btn btn-primary m-2">Pay now</button>
+                                    <button className="btn btn-primary m-2" onClick={addtocart}>Pay now</button>
                                 </Link>
                             </div>
                         </div>
