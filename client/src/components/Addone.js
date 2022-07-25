@@ -19,6 +19,7 @@ function Addone({ match }) {
     const [totalamount, settotalamount] = useState();
     const amount = Math.round(totalamount)
     const grandtotal = amount + 29 + 31
+    const additional = JSON.stringify(localStorage.getItem('additional'))
     localStorage.setItem('totaldays', totaldays)
     localStorage.setItem('grandtotal', grandtotal)
 
@@ -106,7 +107,7 @@ function Addone({ match }) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1 * Additional driver 1</td>
+                                            <td>1 * {additional}</td>
                                             <td>$15</td>
                                             <td>$15</td>
                                         </tr>
