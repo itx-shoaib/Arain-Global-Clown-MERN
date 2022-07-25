@@ -1,4 +1,5 @@
 import { DatePicker } from 'antd';
+import axios from "axios";
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import moment from 'moment';
@@ -15,6 +16,12 @@ function Homescreen() {
   }
   localStorage.setItem('fromdate',formdate)
   localStorage.setItem('todate',todate)
+
+  function takeorderdate() {
+      const dates = {formdate,todate}
+
+      const data = axios.post('/api/order/takeorderdate',dates)
+  }
   return (
     <div>
       <div className="conatiner">
@@ -26,7 +33,7 @@ function Homescreen() {
 
             <div>
               {formdate && todate && (<Link to='/reservation'>
-                <button className="btn my-4 btn-lg btn-primary">Continue reservation</button>
+                <button className="btn my-4 btn-lg btn-primary" onClick={takeorderdate}>Continue reservation</button>
               </Link>)}
               
             </div>
