@@ -71,7 +71,7 @@ router.post('/deletecartdetail',async(req,res)=>{
     try {
         
         const order = await Order.findOne({_id:orderid})
-        order.cartdetail.filter(data => data._id != id)
+        order.cartdetail.filter(data => data.title != "PREPAID REFUEL")
         await order.save();
         res.send("Your addon has been deleted successfully")
     } catch (error) {
