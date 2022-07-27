@@ -66,7 +66,16 @@ router.post('/addtocartdetail',async(req,res)=>{
 
 // Router:3 Adding addon into in cartdetails array in order model by POST method : /api/order/deletecartdetail
 // STATUS : Path is Working
-router.post('/deletecartdetail',(req,res)=>{
-    res.send("/deletecartdetail")
+router.post('/deletecartdetail',async(req,res)=>{
+    const {orderid,id} = req.body
+    try {
+        
+        const order = await Order.findOne({_id:orderid})
+        order.cartdetail.filter(data => data._id == id)
+        await order.save();
+        res.send("Your addon has been deleted successfully")
+    } catch (error) {
+        return res.status(400).json({error})
+    }
 })
 module.exports = router;

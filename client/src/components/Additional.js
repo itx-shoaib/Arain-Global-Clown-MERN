@@ -22,8 +22,15 @@ const Additional = ({ match }) => {
         fetchData()
     }, [])
 
-    function del(id) {
-        alert(id)
+    async function del(addonid) {
+        const info = {orderid,addonid}
+        try {
+            const data = await axios.post('/api/addon/addaddon/:addonid',info)
+            console.log(data)
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async function add(id) {
