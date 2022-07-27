@@ -6,8 +6,7 @@ import { useParams, Link } from "react-router-dom";
 const Additional = ({ match }) => {
     const [addon, setaddon] = useState();
     const [additional, setadditional] = useState();
-    const { addonid } = useParams();
-    localStorage.setItem('additional', additional);
+    const orderid = localStorage.getItem('orderid');
     // For Addon
     useEffect(() => {
         async function fetchData() {
@@ -23,14 +22,23 @@ const Additional = ({ match }) => {
         fetchData()
     }, [])
 
-    async function add() {
-        try {
+    async function add(id) {
+        
+        const info = {orderid,id}
 
-            const data = await (await axios.get(`/api/addon/addaddon/${addonid}`)).data
-            setadditional(data);
+        try {
+            const data = await axios.post('/api/order/addtocartdetail',info)
+            console.log(data)
         } catch (error) {
             console.log(error)
         }
+        // try {
+
+        //     const data = await (await axios.get(`/api/addon/addaddon/`)).data
+        //     setadditional(data);
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
 
     return (
