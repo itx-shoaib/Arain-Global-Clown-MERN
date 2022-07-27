@@ -37,7 +37,7 @@ router.get('/getallcars',async(req,res)=>{
 
 // Route 3: Fetching a car by id by GET method , /api/car/getcarbyid/:carid
 // STATUS: Working
-router.get('/getcarbyid/:carid',async(req,res)=>{
+router.get('/getcarbyid',async(req,res)=>{
     // Storing carid from request body.
     const carid = req.params.carid
 

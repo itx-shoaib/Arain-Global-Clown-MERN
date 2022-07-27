@@ -30,11 +30,14 @@ router.post('/addtocart',async(req,res)=>{
     try {
         const cars = await Car.findOne({_id:car});
         const order = await Order.findOne({_id:id});
-        order.cart.push({car:cars._id, name : cars.name , rentperday:cars.rentperday})
+        order.cart.push({car:cars._id, name : cars.name , rentperday:cars.rentperday, image : cars.image[0]})
         await order.save();
         const temp ={
             car : cars._id,
-            id: order._id
+            id: order._id,
+            name : cars.name,
+            rentperday:cars.rentperday,
+            image : cars.image
         }
         res.send(temp)
     } catch (error) {

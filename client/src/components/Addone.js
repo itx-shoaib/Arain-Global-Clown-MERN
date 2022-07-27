@@ -7,27 +7,26 @@ import Additional from './Additional';
 function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
-    // const [booking, setbooking] = useState();
-    const { carid } = useParams();
+    const temp = JSON.parse(localStorage.getItem('temp'));
+    const car = temp.name;
+    const rentperday = temp.rentperday
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
     const todate = localStorage.getItem('todate');
     const todates = moment(todate, 'DD-MM-YYYY')
     const fromdates = moment(fromdate, 'DD-MM-YYYY')
     const totaldays = moment.duration(todates.diff(fromdates)).asDays()
-    const [totalamount, settotalamount] = useState();
+    const totalamount = rentperday * totaldays;
     const amount = Math.round(totalamount)
     const grandtotal = amount + 29 + 31
     const additional = JSON.stringify(localStorage.getItem('additional'))
     localStorage.setItem('totaldays', totaldays)
     localStorage.setItem('grandtotal', grandtotal)
-    // const temp = JSON.parse(localStorage.getItem('temp'))
-    // alert(temp.car)
 
     async function bookCar() {
         const bookingDetail = {
             cars: cars,
-            carid: carid,
+            carid: cars,
             fromdate: JSON.stringify(fromdate),
             todate: JSON.stringify(todate),
             totalamount: JSON.parse(localStorage.getItem('grandtotal')),
@@ -47,8 +46,8 @@ function Addone({ match }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = (await axios.get(`/api/car/getcarbyid/${carid}`)).data
-                settotalamount(data.rentperday * totaldays)
+                const data = (await axios.get(`/api/car/getcarbyid/${car}`)).data
+                
                 setcars(data);
             } catch (error) {
                 console.log(error)
@@ -71,10 +70,10 @@ function Addone({ match }) {
                     </div>
                     <div className="col-md-5">
 
-                        {cars && (<div className="card mb-4" style={{ width: '18rem' }}>
-                            <img src={cars.imageurls[0]} className="card-img-top" alt="..." />
+                        <div className="card mb-4" style={{ width: '18rem' }}>
+                            <img src='' className="card-img-top" alt="..." />
                             <div className="card-body">
-                                <h2 className="card-title">{cars.name}</h2>
+                                <h2 className="card-title">{car}</h2>
                                 <h6>Rate:</h6>
                                 <table className="table">
                                     <thead>
@@ -93,7 +92,7 @@ function Addone({ match }) {
                                         <tr>
                                             <td>Rental charges rate</td>
                                             <td></td>
-                                            <th> ${cars.rentperday}</th>
+                                            <th> ${rentperday}</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -145,11 +144,11 @@ function Addone({ match }) {
                                 <div>
                                     <p><b>Estimated Total : ${grandtotal}</b></p>
                                 </div>
-                                <Link to={`/checkout/${carid}/${cars.name}`}>
+                                <Link to={`/checkout/${car}/${car}`}>
                                     <button className="btn btn-primary" onClick={bookCar}>Continue</button>
                                 </Link>
                             </div>
-                        </div>)}
+                        </div>
                     </div>
                 </div>
             </div>
