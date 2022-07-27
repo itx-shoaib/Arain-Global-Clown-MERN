@@ -49,7 +49,15 @@ router.post('/addtocart',async(req,res)=>{
 
 // Router:2 Adding addon into in cartdetails array in order model by POST method : /api/order/addtocartdetail
 // STATUS : Path is Working
-router.post('/addtocartdetail',(req,res)=>{
-    res.send('addtocartdetail')
-})
+router.post('/addtocartdetail',async(req,res)=>{
+    const {orderid,id} = req.body
+    try {
+        const order = await Order.findOne({_id:orderid})
+        res.send(order)
+        
+    } catch (error) {
+        return res.status(400).json({error})
+    }
+});
+
 module.exports = router;
