@@ -42,7 +42,7 @@ const Additional = ({ match }) => {
                             <h5 className="card-title">{addon.title}</h5>
                             <p className="card-text">{addon.description}</p>
                             <Link to={`/addones/${addon._id}`}>
-                                <button className="btn btn-primary" onClick={add} >Add</button>
+                                <button className="btn btn-primary" onClick={()=>{add(addon._id)}} >Add</button>
                             </Link>
                         </div>
                     </div>
