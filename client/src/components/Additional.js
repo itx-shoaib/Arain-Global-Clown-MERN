@@ -22,6 +22,10 @@ const Additional = ({ match }) => {
         fetchData()
     }, [])
 
+    function del(id) {
+        alert(id)
+    }
+
     async function add(id) {
 
         const info = {orderid,id}
@@ -52,6 +56,8 @@ const Additional = ({ match }) => {
                             <Link to={`/addones/${addon._id}`}>
                                 <button className="btn btn-primary" onClick={()=>{add(addon._id)}} >Add</button>
                             </Link>
+
+                            <button className="btn btn-primary" onClick={()=>{del(addon._id)}} >Delete</button>
                         </div>
                     </div>
                 </>
