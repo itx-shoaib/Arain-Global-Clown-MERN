@@ -25,7 +25,7 @@ const Additional = ({ match }) => {
     async function del(addonid) {
         const info = {orderid,addonid}
         try {
-            const data = await axios.post('/api/addon/addaddon/:addonid',info)
+            const data = await axios.post('/api/order/deletecartdetail',info)
             console.log(data)
             
         } catch (error) {

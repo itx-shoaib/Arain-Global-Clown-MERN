@@ -71,11 +71,12 @@ router.post('/deletecartdetail',async(req,res)=>{
     try {
         
         const order = await Order.findOne({_id:orderid})
-        order.cartdetail.filter(data => data._id == id)
+        order.cartdetail.filter(data => data._id != id)
         await order.save();
         res.send("Your addon has been deleted successfully")
     } catch (error) {
         return res.status(400).json({error})
     }
-})
+});
+
 module.exports = router;
