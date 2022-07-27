@@ -23,11 +23,11 @@ const Additional = ({ match }) => {
     }, [])
 
     async function add(id) {
-        
+
         const info = {orderid,id}
 
         try {
-            const data = await axios.post('/api/order/addtocartdetail',info)
+            const data = await (await axios.post('/api/order/addtocartdetail',info)).data
             console.log(data)
         } catch (error) {
             console.log(error)

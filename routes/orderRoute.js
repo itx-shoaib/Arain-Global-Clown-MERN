@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Order = require('../models/order');
 const Car = require('../models/car');
+const Additional = require('../models/additional');
 
 // Route:1 Getting order dates in order Model by POST method : /api/order/takeorderdate
 // STATUS: Working
@@ -52,7 +53,10 @@ router.post('/addtocart',async(req,res)=>{
 router.post('/addtocartdetail',async(req,res)=>{
     const {orderid,id} = req.body
     try {
+        const additional = await Additional.findOne({_id:id})
         const order = await Order.findOne({_id:orderid})
+        order.cartdetail.push({title:additional.title, price:additional.price})
+        await order.save();
         res.send(order)
         
     } catch (error) {
