@@ -23,6 +23,9 @@ function Addone({ match }) {
     localStorage.setItem('totaldays', totaldays)
     localStorage.setItem('grandtotal', grandtotal)
 
+    const ordertemp = JSON.parse(localStorage.getItem('order'));
+    const order = ordertemp.cartdetail
+
     async function bookCar() {
         const bookingDetail = {
             cars: cars,
@@ -107,11 +110,17 @@ function Addone({ match }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1 * {additional}</td>
-                                            <td>$15</td>
-                                            <td>$15</td>
-                                        </tr>
+                                        
+                                            {order.map(orders=>{
+                                                return <>
+                                                <tr>
+                                                <td>1 * {orders.title}</td>
+                                                <td>$15</td>
+                                                <td>${orders.price}</td>
+                                                </tr>
+                                                </>
+                                            })}
+                                        
                                         <tr>
                                             <td>Add-ons Charges Rate</td>
                                             <td></td>

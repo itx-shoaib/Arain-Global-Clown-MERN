@@ -28,7 +28,7 @@ const Additional = ({ match }) => {
 
         try {
             const data = await (await axios.post('/api/order/addtocartdetail',info)).data
-            console.log(data)
+            localStorage.setItem('order',JSON.stringify(data))
         } catch (error) {
             console.log(error)
         }
