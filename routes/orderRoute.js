@@ -45,4 +45,11 @@ router.post('/addtocart',async(req,res)=>{
     }
 });
 
+
+
+// Router:2 Adding addon into in cartdetails array in order model by POST method : /api/order/addtocartdetail
+// STATUS : Path is Working
+router.post('/addtocartdetail',(req,res)=>{
+    res.send('addtocartdetail')
+})
 module.exports = router;
