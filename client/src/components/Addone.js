@@ -9,7 +9,6 @@ function Addone({ match }) {
     const [addon, setaddon] = useState();
     // const [booking, setbooking] = useState();
     const { carid } = useParams();
-    const { addonid } = useParams();
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
     const todate = localStorage.getItem('todate');
@@ -22,6 +21,8 @@ function Addone({ match }) {
     const additional = JSON.stringify(localStorage.getItem('additional'))
     localStorage.setItem('totaldays', totaldays)
     localStorage.setItem('grandtotal', grandtotal)
+    // const temp = JSON.parse(localStorage.getItem('temp'))
+    // alert(temp.car)
 
     async function bookCar() {
         const bookingDetail = {
@@ -42,6 +43,7 @@ function Addone({ match }) {
         }
 
     }
+    
     useEffect(() => {
         async function fetchData() {
             try {

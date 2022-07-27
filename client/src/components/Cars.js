@@ -24,11 +24,12 @@ function Cars() {
             id:localStorage.getItem('orderid')
             ,car
         }
-        console.log(orderid)
+
         
         try {
-        const result = await axios.post('/api/order/addtocart',orderid)
-        console.log(result)
+        const result = await (await axios.post('/api/order/addtocart',orderid)).data
+        localStorage.setItem('temp',JSON.stringify(result));
+
         
         } catch (error) {
         console.log(error)
