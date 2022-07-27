@@ -49,7 +49,7 @@ router.post('/addtocart',async(req,res)=>{
 
 
 // Router:2 Adding addon into in cartdetails array in order model by POST method : /api/order/addtocartdetail
-// STATUS : Path is Working
+// STATUS : Working
 router.post('/addtocartdetail',async(req,res)=>{
     const {orderid,id} = req.body
     try {
@@ -64,4 +64,9 @@ router.post('/addtocartdetail',async(req,res)=>{
     }
 });
 
+// Router:3 Adding addon into in cartdetails array in order model by POST method : /api/order/deletecartdetail
+// STATUS : Path is Working
+router.post('/deletecartdetail',(req,res)=>{
+    res.send("/deletecartdetail")
+})
 module.exports = router;
