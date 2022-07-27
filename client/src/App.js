@@ -16,7 +16,7 @@ function App() {
           <Route path='/' element={<Homescreen/>} />
           <Route path='/reservation' element={<Reservationscreen/>} />
           <Route path='/addones' element={<Addone/>} />
-          {/* <Route path='/addon/:addonid' element={<Addone/>} /> */}
+          <Route path='/addon/:addonid' element={<Addone/>} />
           <Route path='/checkout/:carid/:car' element={<Checkout/>} />
           
         </Routes>

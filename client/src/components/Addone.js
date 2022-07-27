@@ -8,7 +8,7 @@ function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
     const temp = JSON.parse(localStorage.getItem('temp'));
-    const car = temp.name;
+    const name = temp.name;
     const rentperday = temp.rentperday
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
@@ -43,18 +43,18 @@ function Addone({ match }) {
 
     }
     
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = (await axios.get(`/api/car/getcarbyid/${car}`)).data
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const data = (await axios.get(`/api/car/getcarbyid`)).data
                 
-                setcars(data);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchData();
-    }, []);
+    //             setcars(data);
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     fetchData();
+    // }, []);
 
     
 
@@ -73,7 +73,7 @@ function Addone({ match }) {
                         <div className="card mb-4" style={{ width: '18rem' }}>
                             <img src='' className="card-img-top" alt="..." />
                             <div className="card-body">
-                                <h2 className="card-title">{car}</h2>
+                                <h2 className="card-title">{name}</h2>
                                 <h6>Rate:</h6>
                                 <table className="table">
                                     <thead>
@@ -144,7 +144,7 @@ function Addone({ match }) {
                                 <div>
                                     <p><b>Estimated Total : ${grandtotal}</b></p>
                                 </div>
-                                <Link to={`/checkout/${car}/${car}`}>
+                                <Link to={`/checkout/${temp.car}/${name}`}>
                                     <button className="btn btn-primary" onClick={bookCar}>Continue</button>
                                 </Link>
                             </div>
