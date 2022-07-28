@@ -24,11 +24,11 @@ const Additional = ({ match }) => {
     }, [])
 
     async function del(addonid) {
-        const info = {orderid,addonid}
+        const info = { orderid, addonid }
         try {
-            const data = await (await axios.post('/api/order/deletecartdetail',info)).data
-            localStorage.setItem('order',JSON.stringify(data))
-            
+            const data = await (await axios.post('/api/order/deletecartdetail', info)).data
+            localStorage.setItem('order', JSON.stringify(data))
+
         } catch (error) {
             console.log(error)
         }
@@ -37,11 +37,11 @@ const Additional = ({ match }) => {
 
     async function add(id) {
 
-        const info = {orderid,id}
+        const info = { orderid, id }
 
         try {
-            const data = await (await axios.post('/api/order/addtocartdetail',info)).data
-            localStorage.setItem('order',JSON.stringify(data))
+            const data = await (await axios.post('/api/order/addtocartdetail', info)).data
+            localStorage.setItem('order', JSON.stringify(data))
         } catch (error) {
             console.log(error)
         }
@@ -63,15 +63,21 @@ const Additional = ({ match }) => {
                         <div className="card-body">
                             <h5 className="card-title">{addon.title}</h5>
                             <p className="card-text">{addon.description}</p>
-                        {!order.cartdetail.additional === `${addon._id}` ? (<Link to={`/addones/${addon._id}`}>
-                                <button className="btn btn-primary" onClick={()=>{add(addon._id)}} >Add</button>
-                            </Link>) : (<button className="btn btn-primary" onClick={()=>{del(addon._id)}} >Delete</button>)}
+                            {/* {!order.cartdetail.additionalid === `${addon._id}` ? (
+                            <Link to={`/addones/${addon._id}`}>
+                                <button className="btn btn-primary" onClick={() => { add(addon._id) }} >Add</button>
+                            </Link>
+                            ) 
+                            : 
+                            (
+                            <button className="btn btn-primary" onClick={() => { del(addon._id) }} >Delete</button>
+                            )} */}
                             {/* <Link to={`/addones/${addon._id}`}>
                                 <button className="btn btn-primary" onClick={()=>{add(addon._id)}} >Add</button>
                             </Link>
                             <button className="btn btn-primary" onClick={()=>{del(addon._id)}} >Delete</button> */}
 
-                            
+
                         </div>
                     </div>
                 </>
