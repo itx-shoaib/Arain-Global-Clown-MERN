@@ -7,8 +7,8 @@ import Additional from './Additional';
 function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
-    const [ordertemp, setordertemp] = useState(JSON.parse(localStorage.getItem('order')));
-    const [order, setorder] = useState(ordertemp.additional)
+    // const [ordertemp, setordertemp] = useState(JSON.parse(localStorage.getItem('order')));
+    // const [order, setorder] = useState([])
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
     const rentperday = temp.rentperday
@@ -20,13 +20,20 @@ function Addone({ match }) {
     const totaldays = moment.duration(todates.diff(fromdates)).asDays()
     const totalamount = rentperday * totaldays;
     const amount = Math.round(totalamount)
-    const grandtotal = amount + 29 + 31
     const additional = JSON.stringify(localStorage.getItem('additional'))
     localStorage.setItem('totaldays', totaldays)
+    
+    const ordertemp = JSON.parse(localStorage.getItem('order'))
+    // setorder(ordertemp.cartdetail) ;
+    const order = ordertemp.cartdetail;
+    let total = 0;
+    for (const product of order) {
+        const productTotal = product.price;
+        total = total + productTotal;
+    }
+    const totalprice = 60 + 50
+    const grandtotal = amount+ total +29 + 31
     localStorage.setItem('grandtotal', grandtotal)
-
-    // const ordertemp = ;
-    // const order = ordertemp.cartdetail
 
     async function bookCar() {
         const bookingDetail = {
@@ -47,12 +54,12 @@ function Addone({ match }) {
         }
 
     }
-    
+
     // useEffect(() => {
     //     async function fetchData() {
     //         try {
     //             const data = (await axios.get(`/api/car/getcarbyid`)).data
-                
+
     //             setcars(data);
     //         } catch (error) {
     //             console.log(error)
@@ -61,7 +68,7 @@ function Addone({ match }) {
     //     fetchData();
     // }, []);
 
-    
+
 
     return (
         <div>
@@ -70,7 +77,7 @@ function Addone({ match }) {
                 <div className="row">
                     <div className="col-md-6">
 
-                        <Additional/>
+                        <Additional />
 
                     </div>
                     <div className="col-md-5">
@@ -112,22 +119,27 @@ function Addone({ match }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                            {order.map(orders=>{
-                                                return <>
+                                        {/* {order && <tr>
+                                            <td>1 * {order.title}</td>
+                                            <td>$15</td>
+                                            <td>${order.price}</td>
+                                        </tr> } */}
+
+                                         {order.map(orders => {
+                                                     return <>
+                                                         <tr>
+                                                             <td>1 * {orders.title}</td>
+                                                             <td>${orders.price}</td>
+                                                             <td>${orders.price}</td>
+                                                         </tr>
+                                                     </>
+                                                 })}
+
                                                 <tr>
-                                                <td>1 * {orders.title}</td>
-                                                <td>$15</td>
-                                                <td>${orders.price}</td>
+                                                    <td>Add-ons Charges Rate</td>
+                                                    <td></td>
+                                                    <th>${total}</th>
                                                 </tr>
-                                                </>
-                                            })}
-                                        
-                                        <tr>
-                                            <td>Add-ons Charges Rate</td>
-                                            <td></td>
-                                            <th>$188</th>
-                                        </tr>
                                     </tbody>
                                 </table>
                                 <br />
@@ -163,7 +175,7 @@ function Addone({ match }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

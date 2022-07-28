@@ -79,8 +79,20 @@ router.post('/deletecartdetail',async(req,res)=>{
                 await arr.splice(i,1);
                 console.log("Delete")
             }
+            else if(arr[i].title === "ADDITIONAL DRIVER 1"){
+                await arr.splice(i,1);
+                console.log("Delete")
+            }
+            else if(arr[i].title === "PREPAID REFUEL"){
+                await arr.splice(i,1);
+                console.log("Delete")
+            }
+            else if(arr[i].title === "POST TRIP CLEANING"){
+                await arr.splice(i,1);
+                console.log("Delete")
+            }
             else{
-                console.log(arr[i].additionalid)
+                console.log("In the else")
             }
             
         }
