@@ -67,13 +67,25 @@ router.post('/addtocartdetail',async(req,res)=>{
 // Router:3 Adding addon into in cartdetails array in order model by POST method : /api/order/deletecartdetail
 // STATUS : Path is Working
 router.post('/deletecartdetail',async(req,res)=>{
-    const {orderid,id} = req.body
+    const {orderid,addonid} = req.body
+
     try {
         
         const order = await Order.findOne({_id:orderid})
-        order.cartdetail.filter(data => data.title != "PREPAID REFUEL")
+        // order.cartdetail.filter(data => data.title != "PREPAID REFUEL")
+        var arr = order.cartdetail
+        for (var i = 0; i < arr.length; i++) {
+            if( arr[i].title === "ADDITIONAL DRIVER 2"){
+                await arr.splice(i,1);
+                console.log("Delete")
+            }
+            else{
+                console.log(arr[i].additionalid)
+            }
+            
+        }
         await order.save();
-        res.send("Your addon has been deleted successfully")
+        res.send( order)
     } catch (error) {
         return res.status(400).json({error})
     }

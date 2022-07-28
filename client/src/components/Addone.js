@@ -7,6 +7,8 @@ import Additional from './Additional';
 function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
+    const [ordertemp, setordertemp] = useState(JSON.parse(localStorage.getItem('order')));
+    const [order, setorder] = useState(ordertemp.additional)
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
     const rentperday = temp.rentperday
@@ -23,8 +25,8 @@ function Addone({ match }) {
     localStorage.setItem('totaldays', totaldays)
     localStorage.setItem('grandtotal', grandtotal)
 
-    const ordertemp = JSON.parse(localStorage.getItem('order'));
-    const order = ordertemp.cartdetail
+    // const ordertemp = ;
+    // const order = ordertemp.cartdetail
 
     async function bookCar() {
         const bookingDetail = {
