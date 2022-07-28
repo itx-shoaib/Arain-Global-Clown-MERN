@@ -75,21 +75,25 @@ router.post('/deletecartdetail',async(req,res)=>{
         // order.cartdetail.filter(data => data.title != "PREPAID REFUEL")
         var arr = order.cartdetail
         for (var i = 0; i < arr.length; i++) {
-            if( arr[i].title === "ADDITIONAL DRIVER 2"){
+            if( arr[i].title === "ADDITIONAL DRIVER 1"){
                 await arr.splice(i,1);
-                console.log("Delete")
+                console.log("ADDITIONAL DRIVER 1")
+                break
             }
-            else if(arr[i].title === "ADDITIONAL DRIVER 1"){
+            else if(arr[i].title === "ADDITIONAL DRIVER 2"){
                 await arr.splice(i,1);
-                console.log("Delete")
+                console.log("ADDITIONAL DRIVER 2")
+                break
             }
             else if(arr[i].title === "PREPAID REFUEL"){
                 await arr.splice(i,1);
-                console.log("Delete")
+                console.log("PREPAID REFUEL")
+                break
             }
             else if(arr[i].title === "POST TRIP CLEANING"){
                 await arr.splice(i,1);
-                console.log("Delete")
+                console.log("POST TRIP CLEANING")
+                break
             }
             else{
                 console.log("In the else")

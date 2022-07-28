@@ -27,12 +27,16 @@ function Addone({ match }) {
     // setorder(ordertemp.cartdetail) ;
     const order = ordertemp.cartdetail;
     let total = 0;
-    for (const product of order) {
-        const productTotal = product.price;
+    // for (const product of order) {
+    //     const productTotal = product.price;
+    //     total = total + productTotal;
+    // }
+    for (var i = 0; i < order.length; i++) {
+        let productTotal = JSON.parse(order[i].price);
         total = total + productTotal;
     }
     const totalprice = 60 + 50
-    const grandtotal = amount+ total +29 + 31
+    const grandtotal = amount + total +29 + 31
     localStorage.setItem('grandtotal', grandtotal)
 
     async function bookCar() {
