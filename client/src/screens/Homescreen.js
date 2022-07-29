@@ -26,7 +26,7 @@ function Homescreen() {
 
       try {
         const data = await (await axios.post('/api/order/takeorderdate',dates)).data
-        localStorage.setItem('orderid',data);
+        localStorage.setItem('order',JSON.stringify(data));
         
       } catch (error) {
         console.log(error)

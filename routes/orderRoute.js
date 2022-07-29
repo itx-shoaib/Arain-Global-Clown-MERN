@@ -16,7 +16,7 @@ router.post('/takeorderdate',async(req,res)=>{
         })
 
         const orderbook = await orderdate.save();
-        res.send(orderbook._id)
+        res.send(orderbook)
         
     } catch (error) {
         return res.status(400).json({error})
