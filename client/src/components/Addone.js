@@ -10,6 +10,7 @@ function Addone({ match }) {
     // const [ordertemp, setordertemp] = useState(JSON.parse(localStorage.getItem('order')));
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
+    console.log(name)
     const rentperday = temp.rentperday
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
@@ -25,16 +26,17 @@ function Addone({ match }) {
     const ordertemp = JSON.parse(localStorage.getItem('order'))
     // const [order, setorder] = useState()
     // setorder(ordertemp.cartdetail) ;
-    const order = ordertemp.cartdetail;
+    const order = ordertemp;
+    console.log(order+"umair ");
     let total = 0;
     // for (const product of order) {
     //     const productTotal = product.price;
     //     total = total + productTotal;
     // }
-    for (var i = 0; i < order.length; i++) {
-        let productTotal = JSON.parse(order[i].price);
-        total = total + productTotal;
-    }
+    // for (var i = 0; i < order.length; i++) {
+    //     let productTotal = JSON.parse(order[i].price);
+    //     total = total + productTotal;
+    // }
     const totalprice = 60 + 50
     const grandtotal = amount + total +29 + 31
     localStorage.setItem('grandtotal', grandtotal)

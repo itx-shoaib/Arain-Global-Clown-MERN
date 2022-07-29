@@ -28,7 +28,7 @@ function Cars() {
         try {
             const result = await (await axios.post('/api/order/addtocart',orderid)).data
             localStorage.setItem('temp',JSON.stringify(result));
-
+            console.log(result)
         
         } catch (error) {
             console.log(error)
