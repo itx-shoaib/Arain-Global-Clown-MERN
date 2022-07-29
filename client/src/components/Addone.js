@@ -26,17 +26,17 @@ function Addone({ match }) {
     const ordertemp = JSON.parse(localStorage.getItem('order'))
     // const [order, setorder] = useState()
     // setorder(ordertemp.cartdetail) ;
-    const order = ordertemp;
+    const order = ordertemp.cartdetail;
     console.log(order+"umair ");
     let total = 0;
     // for (const product of order) {
     //     const productTotal = product.price;
     //     total = total + productTotal;
     // }
-    // for (var i = 0; i < order.length; i++) {
-    //     let productTotal = JSON.parse(order[i].price);
-    //     total = total + productTotal;
-    // }
+    for (var i = 0; i < order.length; i++) {
+        let productTotal = JSON.parse(order[i].price);
+        total = total + productTotal;
+    }
     const totalprice = 60 + 50
     const grandtotal = amount + total +29 + 31
     localStorage.setItem('grandtotal', grandtotal)
@@ -91,7 +91,7 @@ function Addone({ match }) {
                         <div className="card mb-4" style={{ width: '18rem' }}>
                             <img src='' className="card-img-top" alt="..." />
                             <div className="card-body">
-                                <h2 className="card-title">{name && {name}}</h2>
+                                <h2 className="card-title">{name}</h2>
                                 <h6>Rate:</h6>
                                 <table className="table">
                                     <thead>
