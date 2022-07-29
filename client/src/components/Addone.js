@@ -65,7 +65,7 @@ function Addone({ match }) {
     async function del(addonid) {
         const info = { orderid, addonid }
         try {
-            const data = await (await axios.post('/api/order/deletecartdetail', info)).data
+            const data = (await axios.post('/api/order/deletecartdetail', info)).data
             localStorage.setItem('order', JSON.stringify(data))
 
         } catch (error) {
