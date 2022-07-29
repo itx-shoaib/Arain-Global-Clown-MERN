@@ -21,6 +21,7 @@ function Addone({ match }) {
     const totalamount = rentperday * totaldays;
     const amount = Math.round(totalamount)
     const additional = JSON.stringify(localStorage.getItem('additional'))
+    const orderid = JSON.parse(localStorage.getItem('order'))._id;
     localStorage.setItem('totaldays', totaldays)
     
     const ordertemp = JSON.parse(localStorage.getItem('order'))
@@ -59,6 +60,18 @@ function Addone({ match }) {
             console.log(error)
         }
 
+    }
+
+    async function del(addonid) {
+        const info = { orderid, addonid }
+        try {
+            const data = await (await axios.post('/api/order/deletecartdetail', info)).data
+            localStorage.setItem('order', JSON.stringify(data))
+
+        } catch (error) {
+            console.log(error)
+        }
+        // window.location.reload();
     }
 
     // useEffect(() => {
@@ -137,6 +150,7 @@ function Addone({ match }) {
                                                              <td>1 * {orders.title}</td>
                                                              <td>${orders.price}</td>
                                                              <td>${orders.price}</td>
+                                                             <td><button className='btn btn-danger' onClick={()=>{del(orders.additionalid)}}>Delete</button></td>
                                                          </tr>
                                                      </>
                                                  })}
