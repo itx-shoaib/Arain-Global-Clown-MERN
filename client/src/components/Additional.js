@@ -23,17 +23,17 @@ const Additional = ({ match }) => {
         fetchData()
     }, [])
 
-    async function del(addonid) {
-        const info = { orderid, addonid }
-        try {
-            const data = await (await axios.post('/api/order/deletecartdetail', info)).data
-            localStorage.setItem('order', JSON.stringify(data))
+    // async function del(addonid) {
+    //     const info = { orderid, addonid }
+    //     try {
+    //         const data = await (await axios.post('/api/order/deletecartdetail', info)).data
+    //         localStorage.setItem('order', JSON.stringify(data))
 
-        } catch (error) {
-            console.log(error)
-        }
-        // window.location.reload();
-    }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    //     // window.location.reload();
+    // }
 
     async function add(id) {
 
@@ -75,7 +75,7 @@ const Additional = ({ match }) => {
                             <Link to={`/addones/${addon._id}`}>
                                 <button className="btn btn-primary" onClick={()=>{add(addon._id)}} >Add</button>
                             </Link>
-                            <button className="btn btn-primary" onClick={()=>{del(addon._id)}} >Delete</button>
+                            {/* <button className="btn btn-primary" onClick={()=>{del(addon._id)}} >Delete</button> */}
 
 
                         </div>

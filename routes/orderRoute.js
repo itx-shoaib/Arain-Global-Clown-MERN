@@ -55,6 +55,9 @@ router.post('/addtocartdetail',async(req,res)=>{
     try {
         const additional = await Additional.findOne({_id:id})
         const order = await Order.findOne({_id:orderid})
+        // if(){
+
+        // }
         order.cartdetail.push({additionalid:id,title:additional.title, price:additional.price})
         await order.save();
         res.send(order)
