@@ -8,7 +8,6 @@ function Addone({ match }) {
     const [cars, setcars] = useState();
     const [addon, setaddon] = useState();
     // const [ordertemp, setordertemp] = useState(JSON.parse(localStorage.getItem('order')));
-    // const [order, setorder] = useState([])
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
     const rentperday = temp.rentperday
@@ -24,6 +23,7 @@ function Addone({ match }) {
     localStorage.setItem('totaldays', totaldays)
     
     const ordertemp = JSON.parse(localStorage.getItem('order'))
+    // const [order, setorder] = useState()
     // setorder(ordertemp.cartdetail) ;
     const order = ordertemp.cartdetail;
     let total = 0;
@@ -89,7 +89,7 @@ function Addone({ match }) {
                         <div className="card mb-4" style={{ width: '18rem' }}>
                             <img src='' className="card-img-top" alt="..." />
                             <div className="card-body">
-                                <h2 className="card-title">{name}</h2>
+                                <h2 className="card-title">{name && {name}}</h2>
                                 <h6>Rate:</h6>
                                 <table className="table">
                                     <thead>
