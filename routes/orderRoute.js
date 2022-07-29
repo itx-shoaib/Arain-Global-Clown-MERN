@@ -55,7 +55,7 @@ router.post('/addtocartdetail',async(req,res)=>{
     try {
         const additional = await Additional.findOne({_id:id})
         const order = await Order.findOne({_id:orderid})
-        order.cartdetail.push({additionalid:additional._id,title:additional.title, price:additional.price})
+        order.cartdetail.push({additionalid:id,title:additional.title, price:additional.price})
         await order.save();
         res.send(order)
         
@@ -77,7 +77,7 @@ router.post('/deletecartdetail',async(req,res)=>{
         for (var i = 0; i < arr.length; i++) {
             if( arr[i].additionalid === {addonid}){
                 await arr.splice(i,1);
-                console.log(arr[i].additionalid)
+                console.log(arr[i]._additionalid)
                 
             }
             else if(arr[i].title === "ADDITIONAL DRIVER 2"){
