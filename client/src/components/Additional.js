@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 const Additional = ({ match }) => {
     const [addon, setaddon] = useState();
     const [additional, setadditional] = useState();
-    const orderid = localStorage.getItem('orderid');
+    const orderid = JSON.parse(localStorage.getItem('order'))._id;
     const order = JSON.parse(localStorage.getItem('order'))
     // For Addon
     useEffect(() => {
