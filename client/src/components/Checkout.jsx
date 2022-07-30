@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
 
 function Checkout({ match }) {
-    const { carid, car } = useParams();
     const [firstname, setfirstname] = useState('');
     const [lastname, setlastname] = useState('');
     const [address, setaddress] = useState('');
@@ -34,13 +32,11 @@ function Checkout({ match }) {
             town,
             state,
             phone,
-            email,
-            car,
-            carid
+            email
         }
 
         try {
-            const data = await axios.post(`/api/booking/checkout/${carid}/${car}`, form)
+            const data = await axios.post('/api/booking/checkout', form)
             console.log(data)
             setfirstname('')
             setlastname('')
@@ -81,12 +77,12 @@ function Checkout({ match }) {
                                     <tr>
                                         <td>{totaldays} Days</td>
                                         <td>$94</td>
-                                        <td>$ {amount}</td>
+                                        <td>$ {rentperday}</td>
                                     </tr>
                                     <tr>
                                         <td>Rental charges rate</td>
                                         <td></td>
-                                        <th> $ {rentperday}</th>
+                                        <th> $ {amount}</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -179,14 +175,14 @@ function Checkout({ match }) {
                             <label htmlFor="email">Email Address</label>
                             <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setemail(e.target.value) }} />
                         </div>
-                        <div className="form-group">
-                            {/* <label htmlFor="car">Car name</label> */}
+                        {/* <div className="form-group">
+                            <label htmlFor="car">Car name</label>
                             <input type="hidden" className="form-control" id="car" value={car} />
                         </div>
                         <div className="form-group">
-                            {/* <label htmlFor="carid">Car id</label> */}
+                            <label htmlFor="carid">Car id</label>
                             <input type="hidden" className="form-control" id="carid" value={carid} />
-                        </div>
+                        </div> */}
                         {order.length >0 && <> 
                         <h5>Addon Detail:</h5>
                         <div className="form-group">
