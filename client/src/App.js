@@ -17,7 +17,7 @@ function App() {
           <Route path='/reservation' element={<Reservationscreen/>} />
           <Route path='/addones' element={<Addone/>} />
           <Route path='/addones/:addonid' element={<Addone/>} />
-          <Route path='/checkout/:carid/:car' element={<Checkout/>} />
+          <Route path='/checkout' element={<Checkout/>} />
           
         </Routes>
         </Router>
