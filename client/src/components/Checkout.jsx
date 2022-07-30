@@ -25,6 +25,7 @@ function Checkout({ match }) {
     const [days, setdays] = useState(totaldays);
     const [price, setprice] = useState(grandtotal)
     const [id, setid] = useState(orderid)
+    const [carname, setcarname] = useState(name)
     
     async function submit(e) {
         e.preventDefault();
@@ -188,7 +189,11 @@ function Checkout({ match }) {
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="id">id</label> */}
-                            <input type="v" className="form-control" id="id" value={id} />
+                            <input type="hidden" className="form-control" id="id" value={id} />
+                        </div>
+                        <div className="form-group">
+                            {/* <label htmlFor="name">name</label> */}
+                            <input type="hidden" className="form-control" id="name" value={carname} />
                         </div>
                         {order.length >0 && <> 
                         <h5>Addon Detail:</h5>
