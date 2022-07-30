@@ -36,7 +36,25 @@ const checkoutSchema = mongoose.Schema({
     carid:{
         type: String,
         required: true
+    },
+    addon1:{
+        type: String,
+        default: "No driver"
+    },
+    addon2:{
+        type: String,
+        default: "No driver"
+    },
+    addon3:{
+        type : String,
+        default: "No Post trip cleaning"
+    },
+    addon4:{
+        type: String,
+        default: "No Prepaid refuel"
     }
+
+
 
 
 },{
