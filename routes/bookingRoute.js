@@ -52,7 +52,7 @@ router.post('/checkout',async(req,res)=>{
         email: req.body.email,
         orderid : req.body.id,
         price : req.body.price,
-        day : req.body.day,
+        day : req.body.days,
         name : req.body.name
 
     })
