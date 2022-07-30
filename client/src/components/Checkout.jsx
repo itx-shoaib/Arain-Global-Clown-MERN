@@ -36,7 +36,11 @@ function Checkout({ match }) {
             town,
             state,
             phone,
-            email
+            email,
+            days,
+            price,
+            id,
+            carname
         }
 
         try {

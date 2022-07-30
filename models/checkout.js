@@ -37,7 +37,11 @@ const checkoutSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    days : {
+    day : {
+        type : String,
+        required : true
+    },
+    name : {
         type : String,
         required : true
     },

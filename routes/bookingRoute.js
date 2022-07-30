@@ -50,8 +50,11 @@ router.post('/checkout',async(req,res)=>{
         state: req.body.state,
         phone: req.body.phone,
         email: req.body.email,
-        car: req.params.car,
-        carid: req.params.carid
+        orderid : req.body.id,
+        price : req.body.price,
+        day : req.body.day,
+        name : req.body.name
+
     })
 
     try {
