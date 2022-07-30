@@ -23,12 +23,12 @@ function Addone({ match }) {
     const additional = JSON.stringify(localStorage.getItem('additional'))
     const orderid = JSON.parse(localStorage.getItem('order'))._id;
     localStorage.setItem('totaldays', totaldays)
-    
+
     const ordertemp = JSON.parse(localStorage.getItem('order'))
     // const [order, setorder] = useState()
     // setorder(ordertemp.cartdetail) ;
     const order = ordertemp.cartdetail;
-    console.log(order+"umair ");
+    console.log(order + "umair ");
     let total = 0;
     // for (const product of order) {
     //     const productTotal = product.price;
@@ -39,7 +39,7 @@ function Addone({ match }) {
         total = total + productTotal;
     }
     const totalprice = 60 + 50
-    const grandtotal = amount + total +29 + 31
+    const grandtotal = amount + total + 29 + 31
     localStorage.setItem('grandtotal', grandtotal)
 
     async function bookCar() {
@@ -128,40 +128,40 @@ function Addone({ match }) {
                                     </tbody>
                                 </table>
                                 <br />
-                                <h6>Add Ones:</h6>
-                                <table className="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">QTY</th>
-                                            <th scope="col">RATE</th>
-                                            <th scope="col">SUB TOTAL</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {/* {order && <tr>
+                                {/* {order && <tr>
                                             <td>1 * {order.title}</td>
                                             <td>$15</td>
                                             <td>${order.price}</td>
                                         </tr> } */}
 
-                                         {order.map(orders => {
-                                                     return <>
-                                                         <tr>
-                                                             <td>1 * {orders.title}</td>
-                                                             <td>${orders.price}</td>
-                                                             <td>${orders.price}</td>
-                                                             <td><button className='btn btn-danger' onClick={()=>{del(orders.additionalid)}}>Delete</button></td>
-                                                         </tr>
-                                                     </>
-                                                 })}
-
+                                {order.map(orders => {
+                                    return <>
+                                        <h6>Add Ones:</h6>
+                                        <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">QTY</th>
+                                                    <th scope="col">RATE</th>
+                                                    <th scope="col">SUB TOTAL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1 * {orders.title}</td>
+                                                    <td>${orders.price}</td>
+                                                    <td>${orders.price}</td>
+                                                    <td><button className='btn btn-danger' onClick={() => { del(orders.additionalid) }}>Delete</button></td>
+                                                </tr>
                                                 <tr>
                                                     <td>Add-ons Charges Rate</td>
                                                     <td></td>
                                                     <th>${total}</th>
                                                 </tr>
-                                    </tbody>
-                                </table>
+                                            </tbody>
+                                        </table>
+                                    </>
+                                })}
+
                                 <br />
                                 <h6>Taxes & Fees:</h6>
                                 <table className="table">
