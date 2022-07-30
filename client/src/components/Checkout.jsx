@@ -12,6 +12,19 @@ function Checkout({ match }) {
     const [phone, setphone] = useState('');
     const [email, setemail] = useState('');
 
+    // For Car details
+    const temp = JSON.parse(localStorage.getItem('temp'));
+    const name = temp.name;
+    const rentperday = temp.rentperday
+    const orderid = JSON.parse(localStorage.getItem('order'))._id;
+    const ordertemp = JSON.parse(localStorage.getItem('order'))
+    const order = ordertemp.cartdetail;
+    const totaldays = localStorage.getItem('totaldays')
+    const totalamount = rentperday * totaldays;
+    const amount = Math.round(totalamount)
+    const total = localStorage.getItem('total')
+    const grandtotal = localStorage.getItem('grandtotal')
+
     async function submit(e) {
         e.preventDefault();
         const form = {
@@ -51,7 +64,88 @@ function Checkout({ match }) {
             <div className="row">
 
                 <div className="col-md-5">
+                    <div className="card mb-4" style={{ width: '18rem' }}>
+                        <img src='' className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h2 className="card-title">{name}</h2>
+                            <h6>Rate:</h6>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">QTY</th>
+                                        <th scope="col">RATE</th>
+                                        <th scope="col">SUB TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{totaldays} Days</td>
+                                        <td>$94</td>
+                                        <td>$ {amount}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rental charges rate</td>
+                                        <td></td>
+                                        <th> $ {rentperday}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
 
+                            {order.map(orders => {
+                                return <>
+                                    <h6>Add Ones:</h6>
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">QTY</th>
+                                                <th scope="col">RATE</th>
+                                                <th scope="col">SUB TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1 * {orders.title} </td>
+                                                <td>$ {orders.price}</td>
+                                                <td>$ {orders.price}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Add-ons Charges Rate</td>
+                                                <td></td>
+                                                <th>$ {total}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </>
+                            })}
+
+                            <br />
+                            <h6>Taxes & Fees:</h6>
+                            <table className="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Tax</td>
+                                        <td></td>
+                                        <td>$29</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Admin Fee</td>
+                                        <td></td>
+                                        <td>$31</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pickup Charges</td>
+                                        <td></td>
+                                        <th></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <div>
+                                <p><b>Estimated Total : $ {grandtotal}</b></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-md-5">
                     <h3>Driver Details</h3>
@@ -86,13 +180,23 @@ function Checkout({ match }) {
                             <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setemail(e.target.value) }} />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="car">Car name</label>
-                            <input type="text" className="form-control" id="car" value={car} />
+                            {/* <label htmlFor="car">Car name</label> */}
+                            <input type="hidden" className="form-control" id="car" value={car} />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="carid">Car id</label>
-                            <input type="text" className="form-control" id="carid" value={carid} />
+                            {/* <label htmlFor="carid">Car id</label> */}
+                            <input type="hidden" className="form-control" id="carid" value={carid} />
                         </div>
+                        {order.length >0 && <> 
+                        <h5>Addon Detail:</h5>
+                        <div className="form-group">
+                            <label htmlFor="driver1">Driver name:</label>
+                            <input type="text" className="form-control" id="driver1"  />
+                        </div> 
+
+                            </>}
+
+
                         <button className="btn btn-primary" onClick={submit}>Place Order</button>
                     </form>
 

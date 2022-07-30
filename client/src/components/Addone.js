@@ -36,7 +36,7 @@ function Addone({ match }) {
         total = total + productTotal;
     }
     
-    localStorage.setItem('total',total);
+    localStorage.setItem('total',total)
     const grandtotal = amount + total + 29 + 31
     localStorage.setItem('grandtotal', grandtotal)
 
