@@ -71,7 +71,7 @@ function Addone({ match }) {
         } catch (error) {
             console.log(error)
         }
-        // window.location.reload();
+        window.location.reload();
     }
 
     // useEffect(() => {
