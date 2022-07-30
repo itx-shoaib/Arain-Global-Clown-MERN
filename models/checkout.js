@@ -29,13 +29,17 @@ const checkoutSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    car:{
-        type: String,
-        required:true
-    },
-    carid:{
+    orderid:{
         type: String,
         required: true
+    },
+    price : {
+        type : String,
+        required : true
+    },
+    days : {
+        type : String,
+        required : true
     },
     addon1:{
         type: String,
