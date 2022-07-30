@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import moment from 'moment';
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Additional from './Additional';
 
 function Addone({ match }) {
     const [cars, setcars] = useState();
-    const [addon, setaddon] = useState();
     // const [ordertemp, setordertemp] = useState(JSON.parse(localStorage.getItem('order')));
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
-    console.log(name)
     const rentperday = temp.rentperday
     // saving dates from localstorage in variable.
     const fromdate = localStorage.getItem('fromdate');
@@ -20,7 +18,6 @@ function Addone({ match }) {
     const totaldays = moment.duration(todates.diff(fromdates)).asDays()
     const totalamount = rentperday * totaldays;
     const amount = Math.round(totalamount)
-    const additional = JSON.stringify(localStorage.getItem('additional'))
     const orderid = JSON.parse(localStorage.getItem('order'))._id;
     localStorage.setItem('totaldays', totaldays)
 
@@ -28,7 +25,7 @@ function Addone({ match }) {
     // const [order, setorder] = useState()
     // setorder(ordertemp.cartdetail) ;
     const order = ordertemp.cartdetail;
-    console.log(order + "umair ");
+
     let total = 0;
     // for (const product of order) {
     //     const productTotal = product.price;
@@ -38,7 +35,8 @@ function Addone({ match }) {
         let productTotal = JSON.parse(order[i].price);
         total = total + productTotal;
     }
-    const totalprice = 60 + 50
+    
+    localStorage.setItem('total',total);
     const grandtotal = amount + total + 29 + 31
     localStorage.setItem('grandtotal', grandtotal)
 
