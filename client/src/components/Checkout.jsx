@@ -9,7 +9,7 @@ function Checkout({ match }) {
     const [state, setstate] = useState('');
     const [phone, setphone] = useState('');
     const [email, setemail] = useState('');
-
+    
     // For Car details
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
@@ -22,7 +22,10 @@ function Checkout({ match }) {
     const amount = Math.round(totalamount)
     const total = localStorage.getItem('total')
     const grandtotal = localStorage.getItem('grandtotal')
-
+    const [days, setdays] = useState(totaldays);
+    const [price, setprice] = useState(grandtotal)
+    const [id, setid] = useState(orderid)
+    
     async function submit(e) {
         e.preventDefault();
         const form = {
@@ -175,14 +178,18 @@ function Checkout({ match }) {
                             <label htmlFor="email">Email Address</label>
                             <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setemail(e.target.value) }} />
                         </div>
-                        {/* <div className="form-group">
-                            <label htmlFor="car">Car name</label>
-                            <input type="hidden" className="form-control" id="car" value={car} />
+                        <div className="form-group">
+                            {/* <label htmlFor="days">Total days</label> */}
+                            <input type="hidden" className="form-control" id="email" value={days} />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="carid">Car id</label>
-                            <input type="hidden" className="form-control" id="carid" value={carid} />
-                        </div> */}
+                            {/* <label htmlFor="amount">Grandtotal</label> */}
+                            <input type="hidden" className="form-control" id="amount" value={price} />
+                        </div>
+                        <div className="form-group">
+                            {/* <label htmlFor="id">id</label> */}
+                            <input type="v" className="form-control" id="id" value={id} />
+                        </div>
                         {order.length >0 && <> 
                         <h5>Addon Detail:</h5>
                         <div className="form-group">
