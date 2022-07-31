@@ -37,6 +37,12 @@ function Checkout({ match }) {
     const [addon2, setaddon2] = useState(order[num].title === "ADDITIONAL DRIVER 2" ? true : 'NO' );
     const [addon3, setaddon3] = useState(order[num].title === "POST TRIP CLEANING" ? true : 'NO' );
     const [addon4, setaddon4] = useState(order[num].title === "PREPAID REFUEL" ? true : 'NO' );
+    // if (addon1 === true || addon2 === true || addon3 === true || addon4 === true) {
+    //     setaddon1("ADDITIONAL DRIVER 1");
+    //     setaddon2("ADDITIONAL DRIVER 2");
+    //     setaddon3("POST TRIP CLEANING");
+    //     setaddon4("PREPAID REFUEL");
+    // }
     
     
     // for (let i = 0; i < order.length; i++) {
@@ -53,7 +59,7 @@ function Checkout({ match }) {
     // }
 
     async function submit(e) {
-        e.preventDefault();
+        // e.preventDefault();
         const form = {
             firstname,
             lastname,
@@ -86,7 +92,8 @@ function Checkout({ match }) {
         } catch (error) {
             console.log(error)
         }
-
+        localStorage.clear();
+        window.location.href = "/"
 
     }
 
@@ -264,7 +271,7 @@ function Checkout({ match }) {
                         </>) : addon3 === true ?  (<>
                             <h5>Post Trip Cleaning Detail:</h5>
                             <div className="form-group">
-                                <input type="text" className="form-control" id="cleaning" />
+                                <input type="text" className="form-control" id="cleaning" value={addon3} />
                             </div>
                         </>):addon4 === true ?(<>
                             <h5>Prepaid Refuel Detail:</h5>
