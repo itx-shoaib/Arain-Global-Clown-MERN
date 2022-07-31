@@ -9,7 +9,7 @@ function Checkout({ match }) {
     const [state, setstate] = useState('');
     const [phone, setphone] = useState('');
     const [email, setemail] = useState('');
-    
+
     // For Car details
     const temp = JSON.parse(localStorage.getItem('temp'));
     const name = temp.name;
@@ -26,7 +26,32 @@ function Checkout({ match }) {
     const [price, setprice] = useState(grandtotal)
     const [id, setid] = useState(orderid)
     const [carname, setcarname] = useState(name)
+    let num = 0
+    for (let i = 0; i < order.length; i++) {
+        let title = order[i].title
+        if (title === "ADDITIONAL DRIVER 2") {
+            num = num + i;
+        }
+    }
+    const [addon1, setaddon1] = useState(order[num].title === "ADDITIONAL DRIVER 1" ? true : 'NO' );
+    const [addon2, setaddon2] = useState(order[num].title === "ADDITIONAL DRIVER 2" ? true : 'NO' );
+    const [addon3, setaddon3] = useState(order[num].title === "POST TRIP CLEANING" ? true : 'NO' );
+    const [addon4, setaddon4] = useState(order[num].title === "PREPAID REFUEL" ? true : 'NO' );
     
+    
+    // for (let i = 0; i < order.length; i++) {
+    //     let title = order[i].title
+    //     if (title === "ADDITIONAL DRIVER 2") {
+    //         localStorage.setItem('driver1',JSON.stringify(title))
+    //     }
+    // }
+    // const driver1 = JSON.parse(localStorage.getItem('driver1'))
+    // setdriver1(driver1)
+    // setdriver1(driver)
+    // if("ADDITIONAL DRIVER 1" in order.title){
+    //     setdriver1(order.title)
+    // }
+
     async function submit(e) {
         e.preventDefault();
         const form = {
@@ -40,7 +65,8 @@ function Checkout({ match }) {
             days,
             price,
             id,
-            carname
+            carname,
+            addon1
         }
 
         try {
@@ -199,14 +225,50 @@ function Checkout({ match }) {
                             {/* <label htmlFor="name">name</label> */}
                             <input type="hidden" className="form-control" id="name" value={carname} />
                         </div>
-                        {order.length >0 && <> 
-                        <h5>Addon Detail:</h5>
-                        <div className="form-group">
-                            <label htmlFor="driver1">Driver name:</label>
-                            <input type="text" className="form-control" id="driver1"  />
-                        </div> 
+                       {/* { addon1 === true && <>
+                                                    <h5>Addon Detail:</h5>
+                            <div className="form-group">
+                                <label htmlFor="driver1">Driver name:</label>
+                                <input type="text" className="form-control" id="driver1" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="driver1num">Driver number:</label>
+                                <input type="tel" className="form-control" id="driver1num" />
+                            </div>
+                        </>} */}
+                        {addon1 === true ? (<>
+                            <h5>Additional Driver 1 Detail:</h5>
+                            <div className="form-group">
+                                <label htmlFor="driver1">Driver name:</label>
+                                <input type="text" className="form-control" id="driver1" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="driver1num">Driver number:</label>
+                                <input type="tel" className="form-control" id="driver1num" />
+                            </div>
 
-                            </>}
+                        </>) 
+                        : addon2 === true ? (<>
+                        <h5>Additional driver 2 Detail:</h5>
+                            <div className="form-group">
+                                <label htmlFor="driver2">Driver name:</label>
+                                <input type="text" className="form-control" id="driver2" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="driver2num">Driver number:</label>
+                                <input type="tel" className="form-control" id="driver2num" />
+                            </div>
+                        </>) : addon3 === true ?  (<>
+                            <h5>Post Trip Cleaning Detail:</h5>
+                            <div className="form-group">
+                                <input type="text" className="form-control" id="cleaning" />
+                            </div>
+                        </>):addon4 === true ?(<>
+                            <h5>Prepaid Refuel Detail:</h5>
+                            <div className="form-group">
+                                <input type="text" className="form-control" id="cleaning" />
+                            </div>
+                        </>) :(<></>)}
 
 
                         <button className="btn btn-primary" onClick={submit}>Place Order</button>
