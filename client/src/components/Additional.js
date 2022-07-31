@@ -40,7 +40,7 @@ const Additional = ({ match }) => {
         const info = { orderid, id }
 
         try {
-            const data = await (await axios.post('/api/order/addtocartdetail', info)).data
+            const data =  (await axios.post('/api/order/addtocartdetail', info)).data
             localStorage.setItem('order', JSON.stringify(data))
         } catch (error) {
             console.log(error)
