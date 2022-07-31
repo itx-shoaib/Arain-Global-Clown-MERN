@@ -53,7 +53,11 @@ router.post('/checkout',async(req,res)=>{
         orderid : req.body.id,
         price : req.body.price,
         day : req.body.days,
-        name : req.body.carname
+        name : req.body.carname,
+        addon1 : req.body.addon1,
+        addon2 : req.body.addon2,
+        addon3 : req.body.addon3,
+        addon4 : req.body.addon4
 
     })
 

@@ -66,7 +66,10 @@ function Checkout({ match }) {
             price,
             id,
             carname,
-            addon1
+            addon1,
+            addon2,
+            addon3,
+            addon4
         }
 
         try {
