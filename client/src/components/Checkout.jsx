@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef  } from 'react';
 import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
 function Checkout({ match }) {
     const [firstname, setfirstname] = useState('');
@@ -59,7 +60,7 @@ function Checkout({ match }) {
     // }
 
     async function submit(e) {
-        // e.preventDefault();
+        e.preventDefault();
         const form = {
             firstname,
             lastname,
@@ -92,10 +93,35 @@ function Checkout({ match }) {
         } catch (error) {
             console.log(error)
         }
-        localStorage.clear();
-        window.location.href = "/"
+        // localStorage.clear();
+        // window.location.href = "/"
+
+        // await emailjs.sendForm('service_bq8waof', 'template_i8mzosj', e.target, '_BBaQSHFOeRkdSaJc')
+        // .then((result) => {
+        //     console.log(result.text);
+        // }, (error) => {
+        //     console.log(error.text);
+        // });
 
     }
+    const form = useRef();
+    const sendEmail = (e)=>{
+        emailjs.sendForm('service_bq8waof', 'template_i8mzosj', form.current,'_BBaQSHFOeRkdSaJc')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    };
+
+    // function sendEmail(e) {
+    //     emailjs.sendForm('service_bq8waof', 'template_i8mzosj', form.current,'_BBaQSHFOeRkdSaJc')
+    //     .then((result) => {
+    //         console.log(result.text);
+    //     }, (error) => {
+    //         console.log(error.text);
+    //     });
+    // }
 
 
     return (
@@ -189,19 +215,19 @@ function Checkout({ match }) {
                 </div>
                 <div className="col-md-5">
                     <h3>Driver Details</h3>
-                    <form className='container'>
+                    <form ref={form} onSubmit={sendEmail} className='container'>
                         <div className="form-group">
                             <label htmlFor="firstname">First Name</label>
-                            <input type="text" className="form-control" id="firstname" value={firstname} onChange={(e) => { setfirstname(e.target.value) }} />
+                            <input type="text" className="form-control" id="firstname" name='firstname' value={firstname} onChange={(e) => { setfirstname(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="lastname">Last Name</label>
-                            <input type="text" className="form-control" id="lastname" value={lastname} onChange={(e) => { setlastname(e.target.value) }} />
+                            <input type="text" className="form-control" id="lastname" name='lastname' value={lastname} onChange={(e) => { setlastname(e.target.value) }} />
                         </div>
                         <h6>Country / Region US</h6>
                         <div className="form-group">
                             <label htmlFor="streetaddress">Street Address</label>
-                            <input type="text" className="form-control" id="streetaddress" value={address} onChange={(e) => { setaddress(e.target.value) }} />
+                            <input type="text" className="form-control" id="streetaddress" name='streetaddress' value={address} onChange={(e) => { setaddress(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="town">Town</label>
@@ -217,7 +243,7 @@ function Checkout({ match }) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Email Address</label>
-                            <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setemail(e.target.value) }} />
+                            <input type="email" className="form-control" id="email" name='email' value={email} onChange={(e) => { setemail(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="days">Total days</label> */}
