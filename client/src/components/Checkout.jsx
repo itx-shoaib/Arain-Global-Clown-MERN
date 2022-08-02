@@ -60,6 +60,7 @@ function Checkout({ match }) {
     // }
 
     async function submit(e) {
+        
         e.preventDefault();
         const form = {
             firstname,
@@ -96,7 +97,7 @@ function Checkout({ match }) {
         // localStorage.clear();
         // window.location.href = "/"
 
-        // await emailjs.sendForm('service_bq8waof', 'template_i8mzosj', e.target, '_BBaQSHFOeRkdSaJc')
+        // emailjs.sendForm('service_bq8waof', 'template_i8mzosj', e.target,'_BBaQSHFOeRkdSaJc')
         // .then((result) => {
         //     console.log(result.text);
         // }, (error) => {
@@ -105,13 +106,15 @@ function Checkout({ match }) {
 
     }
     const form = useRef();
-    const sendEmail = (e)=>{
-        emailjs.sendForm('service_bq8waof', 'template_i8mzosj', form.current,'_BBaQSHFOeRkdSaJc')
+    const sendEmail = async(e)=>{
+        e.prevent.default()
+        await emailjs.sendForm('service_bq8waof', 'template_i8mzosj', form.current,'_BBaQSHFOeRkdSaJc')
         .then((result) => {
             console.log(result.text);
         }, (error) => {
             console.log(error.text);
         });
+        // alert(e.target.firstname)
     };
 
     // function sendEmail(e) {
@@ -218,16 +221,16 @@ function Checkout({ match }) {
                     <form ref={form} onSubmit={sendEmail} className='container'>
                         <div className="form-group">
                             <label htmlFor="firstname">First Name</label>
-                            <input type="text" className="form-control" id="firstname" name='firstname' value={firstname} onChange={(e) => { setfirstname(e.target.value) }} />
+                            <input type="text" className="form-control" id="firstname" name="firstname" value={firstname} onChange={(e) => { setfirstname(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="lastname">Last Name</label>
-                            <input type="text" className="form-control" id="lastname" name='lastname' value={lastname} onChange={(e) => { setlastname(e.target.value) }} />
+                            <input type="text" className="form-control" id="lastname" name="lastname" value={lastname} onChange={(e) => { setlastname(e.target.value) }} />
                         </div>
                         <h6>Country / Region US</h6>
                         <div className="form-group">
                             <label htmlFor="streetaddress">Street Address</label>
-                            <input type="text" className="form-control" id="streetaddress" name='streetaddress' value={address} onChange={(e) => { setaddress(e.target.value) }} />
+                            <input type="text" className="form-control" id="streetaddress" name="streetaddress" value={address} onChange={(e) => { setaddress(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="town">Town</label>
@@ -243,11 +246,11 @@ function Checkout({ match }) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Email Address</label>
-                            <input type="email" className="form-control" id="email" name='email' value={email} onChange={(e) => { setemail(e.target.value) }} />
+                            <input type="email" className="form-control" id="email" name="email" value={email} onChange={(e) => { setemail(e.target.value) }} />
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="days">Total days</label> */}
-                            <input type="hidden" className="form-control" id="email" value={days} />
+                            <input type="hidden" className="form-control" id="days" value={days} />
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="amount">Grandtotal</label> */}
@@ -307,7 +310,7 @@ function Checkout({ match }) {
                         </>) :(<></>)}
 
 
-                        <button className="btn btn-primary" onClick={submit}>Place Order</button>
+                        <button className="btn btn-primary" onClick={submit} >Place Order</button>
                     </form>
 
                 </div>
